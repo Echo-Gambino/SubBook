@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".EditSubscriptionActivity">
+        <!-- activity segment of .EditSubscriptionActivity was figured out from:
+        https://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio#24610673
+         -->
+        </activity>
     </application>
 
 </manifest>
