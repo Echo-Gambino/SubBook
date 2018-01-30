@@ -10,11 +10,11 @@ import java.util.List;
 public class SubscriptionList {
     // private ArrayList<Subscription> subList;
     private List<Subscription> subList;
-    private int totalCharge;
+    private double totalCharge;
 
     public SubscriptionList() {
         this.subList = new ArrayList<Subscription>();
-        this.totalCharge = 0;
+        this.totalCharge = 0.0;
     }
 
     public void addSubscription(Subscription subscription) {
@@ -31,24 +31,20 @@ public class SubscriptionList {
         return this.subList;
     }
 
-    public int getSum() {
+    public Subscription getSubscription(int index) {
+        return this.subList.get(index);
+    }
+
+    public double getSum() {
         return this.totalCharge;
     }
 
     public void refreshSum() {
-        int sum = 0;
+        double sum = 0.0;
         for(int i = 0; i < this.subList.size(); i++) {
             sum = sum + this.subList.get(i).getCharge();
         }
         this.totalCharge = sum;
     }
-
-    // getSub() <--
-    // setSub() <--
-    // addSub() <--
-    // delSub() <--
-    // getSum() <--
-    // updateSum() <--
-
 
 }
