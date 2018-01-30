@@ -7,10 +7,10 @@ package com.echo.subbook;
 import java.util.Date;
 
 public class Subscription {
-    private String name;
+    private String name;        // Have a maximum of 20 characters in name.
     private Date date;
     private int charge;
-    private String comment;
+    private String comment;     // Have a maximum of 30 characters in comments.
 
     public Subscription() {
         this.name = "";
@@ -43,8 +43,15 @@ public class Subscription {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws StringTooLongException {
+        /* if/else statements taken from Tweet.java in Echo-Gambino/lonelyTwitter,
+        which was forked from vingk/lonelyTwitter.
+        */
+        if (name.length() > 20) {
+            throw new StringTooLongException();
+        } else {
+            this.name = name;
+        }
     }
 
     public Date getDate() {
@@ -67,8 +74,15 @@ public class Subscription {
         return this.comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setComment(String comment) throws StringTooLongException {
+        /* if/else statements taken from Tweet.java in Echo-Gambino/lonelyTwitter,
+        which was forked from vingk/lonelyTwitter.
+        */
+        if (comment.length() > 30) {
+            throw new StringTooLongException();
+        } else {
+            this.comment = comment;
+        }
     }
 
 }
