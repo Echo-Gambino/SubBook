@@ -17,13 +17,38 @@ public class SubscriptionList {
         this.totalCharge = 0;
     }
 
+    public void addSubscription(Subscription subscription) {
+        this.totalCharge = this.totalCharge + subscription.getCharge();
+        this.subList.add(subscription);
+    }
+
+    public void delSubscription(int index) {
+        this.totalCharge = this.totalCharge - this.subList.get(index).getCharge();
+        this.subList.remove(index);
+    }
+
     public List<Subscription> getSubscriptionList() {
         return this.subList;
     }
 
-    public void setSubscription() {
-        // nothing
+    public int getSum() {
+        return this.totalCharge;
     }
+
+    public void refreshSum() {
+        int sum = 0;
+        for(int i = 0; i < this.subList.size(); i++) {
+            sum = sum + this.subList.get(i).getCharge();
+        }
+        this.totalCharge = sum;
+    }
+
+    // getSub() <--
+    // setSub() <--
+    // addSub() <--
+    // delSub() <--
+    // getSum() <--
+    // updateSum() <--
 
 
 }
