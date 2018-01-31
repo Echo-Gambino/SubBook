@@ -31,30 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.subscription_array = subscription_list_obj.getSubscriptionList();
-
-        adapter = new ArrayAdapter<Subscription>(this,
-                R.layout.sub_item, subscription_list_obj.getSubscriptionList());
-        // this.subscription_list_obj.getSubscriptionList().setAdapter(adapter);
-        this.subscription_array = this.subscription_list_obj.getSubscriptionList();
-        //this.subscription_array.setAdapter(adapter);
-
-
-        Date date1 = new Date();
-        Subscription thing1 = new Subscription("Thing1", date1, 1);
-        Subscription thing2 = new Subscription("Thing2", date1, 2);
-        Subscription thing3 = new Subscription("Thing3", date1, 3);
-        Subscription thing4 = new Subscription("Thing4", date1, 4);
-
-        this.subscription_list_obj.addSubscription(thing1);
-        this.subscription_list_obj.addSubscription(thing2);
-        this.subscription_list_obj.addSubscription(thing3);
-        this.subscription_list_obj.addSubscription(thing4);
-
-        subscription_list_listView = (ListView) findViewById(R.id.listView_subscription);
-
-        adapter.notifyDataSetChanged();
-
     }
 
     /* Code for the onActivityResult(...) {} to be able to respond to the intent of the
@@ -66,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             TextView total_charge_text = findViewById(R.id.textView_total_charge);
             total_charge_text.setText("REQUEST_CODE");
-//            if (requestCode == EditSubscriptionActivity.RESULT_OK ) {
-//                total_charge_text.setText("RESULT_OK");
-//            } else if (requestCode == EditSubscriptionActivity.RESULT_CANCELED) {
-//                total_charge_text.setText("RESULT_CANCELED");
-//            }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 
     public void AddSubscription(View view) {

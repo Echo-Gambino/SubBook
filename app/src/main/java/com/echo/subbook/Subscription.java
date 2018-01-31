@@ -66,8 +66,12 @@ public class Subscription {
         return this.charge;
     }
 
-    public void setCharge(int charge) {
-        this.charge = charge;
+    public void setCharge(int charge) throws NegativeIntegerException {
+        if (charge < 0) {
+            throw new NegativeIntegerException();
+        } else {
+            this.charge = charge;
+        }
     }
 
     public String getComment() {
