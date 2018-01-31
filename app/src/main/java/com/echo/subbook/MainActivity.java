@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String ESA_TITLE = "com.echo.subbook.ESA_TITLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void AddSubscription(View view) {
         Intent intent = new Intent(this, EditSubscriptionActivity.class);
+
+        intent.putExtra(ESA_TITLE ,"Add Subscription");
         startActivity(intent);
     }
 }

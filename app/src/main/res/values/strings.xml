@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SubBook</string>
-    <string name="add_subscription">Add Subscription</string>>
+    <string name="add_subscription">Add Subscription</string>
+    <string name="abort_subscription">Back</string>
 </resources>
