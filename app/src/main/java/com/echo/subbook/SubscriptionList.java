@@ -11,8 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SubscriptionList {
-    // private ArrayList<Subscription> subList;
-    private List<Subscription> subList;
+    private ArrayList<Subscription> subList;
     private double totalCharge;
 
     public SubscriptionList() {
@@ -30,7 +29,7 @@ public class SubscriptionList {
         this.subList.remove(index);
     }
 
-    public List<Subscription> getSubscriptionList() {
+    public ArrayList<Subscription> getSubscriptionList() {
         return this.subList;
     }
 
