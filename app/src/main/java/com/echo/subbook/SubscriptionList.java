@@ -38,7 +38,6 @@ public class SubscriptionList {
             old_subscription.setCharge(new_charge);
         } catch(Exception e) {}
 
-
         String new_comment = new_subscription.getComment();
         try {
             new_subscription.setComment(new_comment);
