@@ -34,11 +34,19 @@ public class MainActivity extends AppCompatActivity {
     public static final String ESA_TITLE = "com.echo.subbook.ESA_TITLE";
     public static final String FILENAME = "subfile.sav";
 
+    public static final String SUBSCRIPTION_NAME = "com.echo.subbook.SUBSCRIPTION_NAME";
+    public static final String SUBSCRIPTION_DATE = "com.echo.subbook.SUBSCRIPTION_DATE";
+    public static final String SUBSCRIPTION_CHARGE = "com.echo.subbook.SUBSCRIPTION_CHARGE";
+    public static final String SUBSCRIPTION_COMMENT = "com.echo.subbook.SUBSCRIPTION_COMMENT";
+    public static final int VIEW_CODE = 2;
+
     private TextView textView_sub_sum;
     private ListView listView_sub_list;
 
     private ArrayAdapter<Subscription> list_adapter;
-    private ArrayList<Subscription> arraylist_subscription = new ArrayList<Subscription>();
+    private ArrayList<Subscription> arraylist_subscription;
+//    private ArrayList<Subscription> arraylist_subscription = new ArrayList<Subscription>();
+    private SubscriptionList obj_subscription;
 
     /* public static final int for startActivityForResult & knowledge of how to use startActivityForResult found in link:
     * https://stackoverflow.com/questions/37768604/how-to-use-startactivityforresult
@@ -83,10 +91,21 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView_sub_list.getItemAtPosition(position);
 
-                String message = listItem.toString();
-                Toast.makeText(getApplicationContext(), message,
-                        Toast.LENGTH_LONG).show();
 
+                Subscription sub = ((Subscription) listItem);
+//                String message = sub.toString() + "   " + Integer.toString(position) + "\n"
+//                        + obj_subscription.getSubscription(position);
+//                Toast.makeText(getApplicationContext(), message,
+//                        Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(view.getContext(), ViewSubscriptionActivity.class);
+
+                intent.putExtra(SUBSCRIPTION_NAME, sub.getName());
+                intent.putExtra(SUBSCRIPTION_DATE, sub.getDate().toString());
+                intent.putExtra(SUBSCRIPTION_CHARGE, sub.getCharge());
+                intent.putExtra(SUBSCRIPTION_COMMENT, sub.getComment());
+
+                startActivityForResult(intent, VIEW_CODE);
             }
         });
 
@@ -102,9 +121,18 @@ public class MainActivity extends AppCompatActivity {
             textView_sub_sum.setText("REQUEST_CODE");
 
             Subscription sub = new Subscription("Netflix");
-            arraylist_subscription.add(sub);
+            Subscription sub1 = new Subscription("Netflix1");
+            Subscription sub2 = new Subscription("Netflix2");
+            Subscription sub3 = new Subscription("Netflix3");
+            Subscription sub4 = new Subscription("Netflix4");
+//            arraylist_subscription.add(sub);
+            obj_subscription.addSubscription(sub);
+            obj_subscription.addSubscription(sub1);
+            obj_subscription.addSubscription(sub2);
+            obj_subscription.addSubscription(sub3);
+            obj_subscription.addSubscription(sub4);
 
-            String message = arraylist_subscription.toString();
+//            String message = arraylist_subscription.toString();
 //            Toast.makeText(getApplicationContext(), message,
 //                    Toast.LENGTH_LONG).show();
 
@@ -123,8 +151,12 @@ public class MainActivity extends AppCompatActivity {
 //                R.layout.sub_item, arraylist_subscription);
 //        list_adapter = new ArrayAdapter<Subscription>(this,
 //                android.R.layout.simple_list_item_1, arraylist_subscription);
+
+//        list_adapter = new ArrayAdapter<Subscription>(this,
+//                android.R.layout.simple_list_item_1, arraylist_subscription);
+
         list_adapter = new ArrayAdapter<Subscription>(this,
-                android.R.layout.simple_list_item_1, arraylist_subscription);
+                android.R.layout.simple_list_item_1, obj_subscription.getSubscriptionList());
 
         listView_sub_list.setAdapter(list_adapter);
 
@@ -136,9 +168,15 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Subscription>>(){}.getType();
-            arraylist_subscription = gson.fromJson(in, listType);
+//            arraylist_subscription = gson.fromJson(in, listType);
+            ArrayList<Subscription> subList = gson.fromJson(in, listType);
+//            obj_subscription = new SubscriptionList(arraylist_subscription);
+            obj_subscription = new SubscriptionList(subList);
         } catch (FileNotFoundException e) {
-            arraylist_subscription = new ArrayList<Subscription>();
+//            arraylist_subscription = new ArrayList<Subscription>();
+            ArrayList<Subscription> subList = new ArrayList<Subscription>();
+//            obj_subscription = new SubscriptionList(arraylist_subscription);
+            obj_subscription = new SubscriptionList(subList);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
-            gson.toJson(arraylist_subscription, out);
+//            gson.toJson(arraylist_subscription, out);
+            gson.toJson(obj_subscription.getSubscriptionList(), out);
             out.flush();
         } catch(FileNotFoundException e) {
             e.printStackTrace();

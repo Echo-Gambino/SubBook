@@ -21,6 +21,8 @@
         https://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio#24610673
          -->
         </activity>
+        <activity android:name=".ViewSubscriptionActivity">
+        </activity>
     </application>
 
 </manifest>

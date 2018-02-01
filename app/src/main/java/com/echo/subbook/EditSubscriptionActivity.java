@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Henry on 2018-01-30.
@@ -19,7 +20,14 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_subscription);
 
+
+
         Intent intent = getIntent();
+        String action = intent.getAction();
+
+            Toast.makeText(getApplicationContext(), action,
+                    Toast.LENGTH_LONG).show();
+
         String title = intent.getStringExtra(MainActivity.ESA_TITLE);
 
         TextView ESA_title = findViewById(R.id.textView_esa_title);

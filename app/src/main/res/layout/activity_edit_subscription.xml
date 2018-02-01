@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:onClick="AbortSubscription"
@@ -21,12 +21,112 @@
         android:id="@+id/textView_esa_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:autoSizeTextType="uniform"
         android:text="TextView"
         android:textAlignment="viewStart"
         android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/editSub_textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:text="Name:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editSub_editText_name"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="85dp" />
+
+    <TextView
+        android:id="@+id/editSUB_textView_date"
+        android:layout_width="41dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:text="Date:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editSub_editText_date"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="145dp" />
+
+    <TextView
+        android:id="@+id/editSub_textView_charge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:text="Charge:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editSub_editText_charge"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="207dp" />
+
+    <TextView
+        android:id="@+id/editSub_textView_commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Comment"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_charge" />
+
+    <EditText
+        android:id="@+id/editSub_editText_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/textView_esa_title"
+        tools:layout_editor_absoluteX="109dp" />
+
+    <EditText
+        android:id="@+id/editSub_editText_date"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_name"
+        tools:layout_editor_absoluteX="109dp" />
+
+    <EditText
+        android:id="@+id/editSub_editText_charge"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_date"
+        tools:layout_editor_absoluteX="109dp" />
+
+    <EditText
+        android:id="@+id/editSub_editText_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_commit" />
 </android.support.constraint.ConstraintLayout>

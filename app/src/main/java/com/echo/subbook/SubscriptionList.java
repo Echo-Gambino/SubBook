@@ -19,6 +19,12 @@ public class SubscriptionList {
         this.totalCharge = 0.0;
     }
 
+    public SubscriptionList(ArrayList<Subscription> subList) {
+        this();
+        this.subList = subList;
+        this.refreshSum();
+    }
+
     public void addSubscription(Subscription subscription) {
         this.totalCharge = this.totalCharge + subscription.getCharge();
         this.subList.add(subscription);
@@ -29,8 +35,8 @@ public class SubscriptionList {
         this.subList.remove(index);
     }
 
-    public ArrayList<Subscription> getSubscriptionList() {
-        return this.subList;
+    public Subscription getSubscription(int index) {
+        return this.subList.get(index);
     }
 
     public void setSubscription(Subscription old_subscription, Subscription new_subscription) {
@@ -51,7 +57,15 @@ public class SubscriptionList {
         try {
             new_subscription.setComment(new_comment);
         } catch(Exception e) {}     // Do nothing if new_comment exceeds char count.
+    }
 
+    public ArrayList<Subscription> getSubscriptionList() {
+        return this.subList;
+    }
+
+    public void setSubscriptionList(ArrayList<Subscription> subList) {
+        this.subList = subList;
+        this.refreshSum();
     }
 
     public double getSum() {

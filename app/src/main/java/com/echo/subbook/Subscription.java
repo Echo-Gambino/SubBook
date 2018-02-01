@@ -91,7 +91,7 @@ public class Subscription {
 
     @Override
     public String toString() {
-        String message = name + ": \t " + Integer.toString(charge) + "\n"
+        String message = name + ": \t $" + Integer.toString(charge) + "\n"
                 + date.toString();
         return message;
     }
