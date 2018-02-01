@@ -12,14 +12,6 @@ import java.util.List;
 
 public class SubscriptionList {
     // private ArrayList<Subscription> subList;
-<<<<<<< HEAD
-    private ArrayList<Subscription> subArray;
-    private int totalCharge;
-
-    public SubscriptionList() {
-        this.subArray = new ArrayList<Subscription>();
-        this.totalCharge = 0;
-=======
     private List<Subscription> subList;
     private double totalCharge;
 
@@ -36,11 +28,10 @@ public class SubscriptionList {
     public void delSubscription(int index) {
         this.totalCharge = this.totalCharge - this.subList.get(index).getCharge();
         this.subList.remove(index);
->>>>>>> 8bfd85a5909f781da05b24cf4032a39af2661524
     }
 
-    public ArrayList<Subscription> getSubscriptionList() {
-        return this.subArray;
+    public List<Subscription> getSubscriptionList() {
+        return this.subList;
     }
 
     public void setSubscription(Subscription old_subscription, Subscription new_subscription) {
@@ -62,25 +53,6 @@ public class SubscriptionList {
             new_subscription.setComment(new_comment);
         } catch(Exception e) {}     // Do nothing if new_comment exceeds char count.
 
-    }
-
-    public void addSubscription(Subscription subscription) {
-        this.totalCharge = this.totalCharge + subscription.getCharge();
-        subArray.add(subscription);
-    }
-
-    public void remSubscription(Subscription subscription) {
-        this.totalCharge = this.totalCharge - subscription.getCharge();
-        subArray.remove(subscription);
-    }
-
-<<<<<<< HEAD
-    public int getSum() {
-        return this.totalCharge;
-=======
-    public Subscription getSubscription(int index) {
-        return this.subList.get(index);
->>>>>>> 8bfd85a5909f781da05b24cf4032a39af2661524
     }
 
     public double getSum() {

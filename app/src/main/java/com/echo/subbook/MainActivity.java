@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView_sub_sum = findViewById(R.id.textView_total_charge);
         listView_sub_list = findViewById(R.id.listView_subscription);
-        Button addSubButton = (Button) findViewById(R.id.);
+        // Button addSubButton = (Button) findViewById(R.id.);
         arraylist_subscription = new ArrayList<Subscription>();
         subscription_list_obj = new SubscriptionList();
 
