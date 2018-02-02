@@ -100,6 +100,10 @@ public class EditSubscriptionActivity extends AppCompatActivity {
                 } else {
                     message = "Success!";
                     try {
+                        /* Converting a Date.toString() format back to a Date datatype was acquired
+                        * via Marko's post within the given link:
+                        * https://stackoverflow.com/questions/9431927/how-to-convert-date-tostring-back-to-date
+                        */
                         Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(date_temp);
                         name = name_temp;
                         date = date_temp;

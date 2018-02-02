@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // loadFromFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -205,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // saveInFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
