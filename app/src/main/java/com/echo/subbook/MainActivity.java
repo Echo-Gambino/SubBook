@@ -32,6 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final String ESA_TITLE = "com.echo.subbook.ESA_TITLE";
+    public static final String ADD_TITLE = "com.echo.subbook.ADD_TITLE";
     public static final String FILENAME = "subfile.sav";
 
     public static final String SUBSCRIPTION_NAME = "com.echo.subbook.SUBSCRIPTION_NAME";
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 * This was used because I didn't know how to send an intent in View.OnClickListener()
                 */
                 Intent intent = new Intent(view.getContext(), EditSubscriptionActivity.class);
-                intent.putExtra(ESA_TITLE ,"Add Subscription");
+                // intent.putExtra(ESA_TITLE ,"Add Subscription");
+                intent.putExtra(ADD_TITLE ,"Add Subscription");
                 /* Code for startActivityForResult(...); and other snippets of code was found in the link:
                 * https://stackoverflow.com/questions/15393899/how-to-close-activity-and-go-back-to-previous-activity-in-android
                 */

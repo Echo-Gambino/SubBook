@@ -21,7 +21,7 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
     public static final String EDIT_DATE = "com.echo.subbook.EDIT_DATE";
     public static final String EDIT_CHARGE = "com.echo.subbook.EDIT_CHARGE";
     public static final String EDIT_COMMENT = "com.echo.subbook.EDIT_COMMENT";
-    public static final String EDIT_MODE = "com.echo.subbook.EDIT_MODE";
+    public static final String EDIT_TITLE = "com.echo.subbook.EDIT_TITLE";
     public static final int EDIT_CODE = 3;
 
     private String name;
@@ -61,7 +61,7 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
                 intent.putExtra(EDIT_DATE, date);
                 intent.putExtra(EDIT_CHARGE, charge);
                 intent.putExtra(EDIT_COMMENT, comment);
-                intent.putExtra(EDIT_MODE, "edit");
+                intent.putExtra(EDIT_TITLE, "Edit Subscription");
 
                 startActivityForResult(intent, EDIT_CODE);
             }
@@ -80,7 +80,6 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
             intent.putExtra(EDIT_DATE, date);
             intent.putExtra(EDIT_CHARGE, charge);
             intent.putExtra(EDIT_COMMENT, comment);
-            intent.putExtra(EDIT_MODE, "edit");
 
             setResult(Activity.RESULT_OK, intent);
 
