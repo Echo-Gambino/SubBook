@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String SUBSCRIPTION_DATE = "com.echo.subbook.SUBSCRIPTION_DATE";
     public static final String SUBSCRIPTION_CHARGE = "com.echo.subbook.SUBSCRIPTION_CHARGE";
     public static final String SUBSCRIPTION_COMMENT = "com.echo.subbook.SUBSCRIPTION_COMMENT";
+    public static final String SUBSCRIPTION_INDEX = "com.echo.subbook.SUBSCRIPTION_INDEX";
     public static final int VIEW_CODE = 2;
 
     private TextView textView_sub_sum;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(SUBSCRIPTION_DATE, sub.getDate().toString());
                 intent.putExtra(SUBSCRIPTION_CHARGE, sub.getCharge());
                 intent.putExtra(SUBSCRIPTION_COMMENT, sub.getComment());
+                intent.putExtra(SUBSCRIPTION_INDEX, position);
 
                 startActivityForResult(intent, VIEW_CODE);
             }
@@ -118,7 +120,26 @@ public class MainActivity extends AppCompatActivity {
     * https://stackoverflow.com/questions/37768604/how-to-use-startactivityforresult
     */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == VIEW_CODE) {
+                Toast.makeText(getApplicationContext(), "okay",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            if (requestCode == VIEW_CODE) {
+                int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
+                obj_subscription.delSubscription(index);
+            }
+
+//            String a = Integer.toString(requestCode);
+//            Toast.makeText(getApplicationContext(), a,
+//                    Toast.LENGTH_LONG).show();
+        }
+
+        /*
         if (requestCode == REQUEST_CODE) {
             textView_sub_sum.setText("REQUEST_CODE");
 
@@ -140,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
 
             list_adapter.notifyDataSetChanged();
             saveInFile();
-
         }
+        */
     }
 
     @Override

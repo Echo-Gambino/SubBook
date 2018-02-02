@@ -7,15 +7,30 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/editSub_button_cancel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:onClick="AbortSubscription"
         android:text="@string/abort_subscription"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editSub_button_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/editSub_button_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/editSub_textView_title"
@@ -34,45 +49,40 @@
 
     <TextView
         android:id="@+id/editSub_textView_name"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="63dp"
+        android:layout_height="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:text="Name:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editSub_editText_name"
-        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="85dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_title" />
 
     <TextView
         android:id="@+id/editSUB_textView_date"
-        android:layout_width="41dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="64dp"
+        android:layout_height="24dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:text="Date:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editSub_editText_date"
-        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="145dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_name" />
 
     <TextView
         android:id="@+id/editSub_textView_charge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_width="63dp"
+        android:layout_height="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:text="Charge:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editSub_editText_charge"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="207dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editSUB_textView_date" />
 
     <TextView
         android:id="@+id/editSub_textView_commit"
@@ -87,46 +97,59 @@
 
     <EditText
         android:id="@+id/editSub_editText_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_title"
-        tools:layout_editor_absoluteX="109dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editSub_textView_name"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_title" />
 
     <EditText
         android:id="@+id/editSub_editText_date"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_name"
-        tools:layout_editor_absoluteX="109dp" />
-
-    <EditText
-        android:id="@+id/editSub_editText_charge"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_date"
-        tools:layout_editor_absoluteX="109dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editSUB_textView_date"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_name" />
 
     <EditText
         android:id="@+id/editSub_editText_comment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_commit" />
+        app:layout_constraintBottom_toTopOf="@+id/editSub_button_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_textView_commit"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editSub_editText_charge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editSub_textView_charge"
+        app:layout_constraintTop_toBottomOf="@+id/editSub_editText_date" />
+
 </android.support.constraint.ConstraintLayout>

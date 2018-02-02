@@ -22,12 +22,14 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
     public static final String EDIT_CHARGE = "com.echo.subbook.EDIT_CHARGE";
     public static final String EDIT_COMMENT = "com.echo.subbook.EDIT_COMMENT";
     public static final String EDIT_TITLE = "com.echo.subbook.EDIT_TITLE";
+    public static final String EDIT_INDEX = "com.echo.subbook.EDIT_INDEX";
     public static final int EDIT_CODE = 3;
 
     private String name;
     private String date;
     private int charge;
     private String comment;
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
         date = intent.getStringExtra(MainActivity.SUBSCRIPTION_DATE);
         charge = intent.getIntExtra(MainActivity.SUBSCRIPTION_CHARGE, 0);
         comment = intent.getStringExtra(MainActivity.SUBSCRIPTION_COMMENT);
+        index = intent.getIntExtra(MainActivity.SUBSCRIPTION_INDEX, 0);
 
         textView_name.setText(name);
         textView_date.setText(date);
@@ -71,8 +74,15 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
+        if (requestCode == EDIT_CODE) {
+            intent.putExtra(EDIT_INDEX, index);
+            setResult(resultCode, intent);
+            finish();
+        }
+
+        /*
         if (requestCode == EDIT_CODE) {
             Intent intent = new Intent(this, MainActivity.class);
 
@@ -85,6 +95,7 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
 
             finish();
         }
+        */
 
     }
 }
