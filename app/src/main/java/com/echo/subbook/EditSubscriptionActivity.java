@@ -19,13 +19,11 @@ import java.util.Date;
  */
 
 public class EditSubscriptionActivity extends AppCompatActivity {
-    public static final String TEST_STRING = "com.echo.subbook.TEST_STRING";
 
     public static final String RET_NAME = "com.echo.subbook.RET_NAME";
     public static final String RET_DATE = "com.echo.subbook.RET_DATE";
     public static final String RET_CHARGE = "com.echo.subbook.RET_CHARGE";
     public static final String RET_COMMENT = "com.echo.subbook.RET_COMMENT";
-    public static final String RET_IS_DELETE = "com.echo.subbook.RET_IS_DELETE";
 
 
     private TextView textView_title;
@@ -119,14 +117,12 @@ public class EditSubscriptionActivity extends AppCompatActivity {
 
                     } catch (Exception e) {
                         message = "Date not formatted correctly, \n please try again";
-                        // editText_date.setText(date);
                     }
                 }
                 if (message != null) {
                     Toast.makeText(getApplicationContext(), message,
                             Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -137,21 +133,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-//        Toast.makeText(getApplicationContext(), message,
-//                Toast.LENGTH_LONG).show();
-
     }
-
-    /*
-    public void fillIntent(Intent intent) {
-        intent.putExtra(RET_NAME, this.name);
-        intent.putExtra(RET_DATE, this.date);
-        intent.putExtra(RET_CHARGE, this.charge);
-        intent.putExtra(RET_COMMENT, this.comment);
-    }
-    */
 
     public void HandleEditing(Intent intent) {
         this.title = intent.getStringExtra(ViewSubscriptionActivity.EDIT_TITLE);
@@ -178,22 +160,5 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         editText_charge.setText(Double.toString(charge));
         editText_comment.setText(comment);
     }
-
-
-//    public void AbortSubscription(View view) {
-//        Intent MyIntentToReturn = new Intent(this, MainActivity.class);
-//
-//        MyIntentToReturn.putExtra(TEST_STRING, "edit subscription returns a value!");
-//
-//        /* Code for setResult(...); and other snippets of code was found in the link:
-//        https://stackoverflow.com/questions/15393899/how-to-close-activity-and-go-back-to-previous-activity-in-android
-//        */
-//        setResult(Activity.RESULT_OK, MyIntentToReturn);
-//        /* finish(); the function that retracts the activity stack by one was acquired by the link:
-//        https://stackoverflow.com/questions/4038479/android-go-back-to-previous-activity
-//        */
-//        finish();
-//    }
-
 
 }
