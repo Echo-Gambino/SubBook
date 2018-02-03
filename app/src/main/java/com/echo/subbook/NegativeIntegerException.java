@@ -28,5 +28,12 @@ package com.echo.subbook;
  * Created by Henry on 2018-01-31.
  */
 
+/**
+ * Represents all Exceptions stemming from there being negative integers
+ *
+ * @author hingyue
+ * @version 1.0
+ * @see Exception
+ */
 public class NegativeIntegerException extends Exception {
 }

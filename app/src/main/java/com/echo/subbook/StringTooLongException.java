@@ -28,6 +28,13 @@ package com.echo.subbook;
  * Created by Henry on 2018-01-29.
  */
 
+/**
+ * Represents all Exceptions stemming from String variables being too long
+ *
+ * @author hingyue
+ * @version 1.0
+ * @see Exception
+ */
 public class StringTooLongException extends Exception {
     // This class extends to Exception, so it throws an exception.
 }
