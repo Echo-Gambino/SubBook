@@ -34,35 +34,74 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Represents SubscriptionList
+ *
+ * @author hingyue
+ * @version 1.0
+ * @see Subscription
+ */
 public class SubscriptionList {
     private ArrayList<Subscription> subList;
     private double totalCharge;
 
+    /**
+     * Consctructs a SubscriptionList object
+     */
     public SubscriptionList() {
         this.subList = new ArrayList<Subscription>();
         this.totalCharge = 0.00;
     }
 
+    /**
+     * Consctructs a SubscriptionList object
+     *
+     * @param subList
+     */
     public SubscriptionList(ArrayList<Subscription> subList) {
         this();
         this.subList = subList;
         this.refreshSum();
     }
 
+    /**
+     * Adds a subscription onto its subscription list and updates its total monetary charge.
+     *
+     * @param subscription
+     */
     public void addSubscription(Subscription subscription) {
         this.totalCharge = this.totalCharge + subscription.getCharge();
         this.subList.add(subscription);
     }
 
+    /**
+     * Deletes (or removes) a subscription from the subscription list by the given index
+     * and updates its total monetary charge.
+     *
+     * @param index
+     */
     public void delSubscription(int index) {
         this.totalCharge = this.totalCharge - this.subList.get(index).getCharge();
         this.subList.remove(index);
     }
 
+    /**
+     * Returns the subscription from the subscription list by the given index.
+     *
+     * @param index
+     * @return Subscription
+     */
     public Subscription getSubscription(int index) {
         return this.subList.get(index);
     }
 
+    /**
+     * Sets the subscription within the subscription list by updating the old_subscription
+     * linked to SubscriptionList with data from an unrelated new_subscription.
+     *
+     * @param old_subscription
+     * @param new_subscription
+     */
     public void setSubscription(Subscription old_subscription, Subscription new_subscription) {
         String new_name = new_subscription.getName();
         try {
@@ -83,21 +122,40 @@ public class SubscriptionList {
         } catch(Exception e) {}     // Do nothing if new_comment exceeds char count.
     }
 
+    /**
+     * Returns the SubscriptionList's whole subscription list (ArrayList<Subscription>)
+     *
+     * @return subList
+     */
     public ArrayList<Subscription> getSubscriptionList() {
         return this.subList;
     }
 
+    /**
+     * Sets the subscription list with a given subList and refreshes the sum of
+     * monetary charge from the subList's given Subscriptions.
+     *
+     * @param subList
+     */
     public void setSubscriptionList(ArrayList<Subscription> subList) {
         this.subList = subList;
         this.refreshSum();
     }
 
+    /**
+     * Returns the sum of monetary charge of all Subscriptions within the SubscriptionList
+     *
+     * @retun totalCharge
+     */
     public double getSum() {
         return this.totalCharge;
     }
 
+    /**
+     * Recalculates the sum of monetary charge of all Subscriptions within the SubscriptionList
+     * */
     public void refreshSum() {
-        double sum = 0.0;
+        double sum = 0.00;
         for(int i = 0; i < this.subList.size(); i++) {
             sum = sum + this.subList.get(i).getCharge();
         }
