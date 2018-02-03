@@ -41,6 +41,17 @@ import java.util.Date;
  * Created by Henry on 2018-01-30.
  */
 
+/**
+ * Represents the edit/add subscription page of the app. The activitie's man purpose is to
+ * take user input and ultimately send it down to the main activity to have the information
+ * to be used to create or change a subscription in SubscriptionList.
+ *
+ * @author hingyue
+ * @version 1.0
+ * @see AppCompatActivity
+ * @see ViewSubscriptionActivity
+ * @see MainActivity
+ * */
 public class EditSubscriptionActivity extends AppCompatActivity {
 
     public static final String RET_NAME = "com.echo.subbook.RET_NAME";
@@ -48,13 +59,11 @@ public class EditSubscriptionActivity extends AppCompatActivity {
     public static final String RET_CHARGE = "com.echo.subbook.RET_CHARGE";
     public static final String RET_COMMENT = "com.echo.subbook.RET_COMMENT";
 
-
     private TextView textView_title;
     private EditText editText_name;
     private EditText editText_date;
     private EditText editText_charge;
     private EditText editText_comment;
-//    private Button button_confirm;
 
     private String title;
     private String name;
@@ -62,6 +71,10 @@ public class EditSubscriptionActivity extends AppCompatActivity {
     private double charge;
     private String comment;
 
+    /**
+     * EditSubscriptionActivity sets up its layout, sets the texts of
+     * textView, editTexts, and Buttons. Then it waits and takes user input.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +98,6 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         String button_confirm_text = "Confirm";
         String button_cancel_text = "Back";
 
-
         if (intent.hasExtra(ViewSubscriptionActivity.EDIT_TITLE)) {
             HandleEditing(intent);
             button_confirm_text = "Confirm Subscription";
@@ -100,6 +112,17 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         button_cancel.setText(button_cancel_text);
 
         button_confirm.setOnClickListener(new View.OnClickListener() {
+            /**
+             * button_confirm's onClick method tries to check for all its inputs to match
+             * its constraints (e.g name's character length must not exceed 20), if all of
+             * it passes, the method will send an intent with all of the extracted information
+             * like name, date, charge, and comment back towards the caller Activity.
+             * If any of the inputs fail to satisfy te constraints, a Toast message will appear
+             * and send a message giving feedback on what happened whilst encouraging the user to
+             * try again.
+             *
+             * @param view
+             * */
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 String name_temp = editText_name.getText().toString();
@@ -150,6 +173,13 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         });
 
         button_cancel.setOnClickListener(new View.OnClickListener() {
+            /**
+             * button cancel's onClick method handles inputs when the user clicks/taps
+             * the button corresponding the button_cancel, which it responds by returning
+             * an intent back to its caller Activity with the RESULT_CANCELED flag on.
+             *
+             * @param view
+             */
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 setResult(Activity.RESULT_CANCELED, intent);
@@ -158,6 +188,12 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets the class's private vars' buffer to have preset for Editing Subscription,
+     * which takes and stores all of its information from the intent's extra's.
+     *
+     * @param intent
+     */
     public void HandleEditing(Intent intent) {
         this.title = intent.getStringExtra(ViewSubscriptionActivity.EDIT_TITLE);
         this.name = intent.getStringExtra(ViewSubscriptionActivity.EDIT_NAME);
@@ -167,6 +203,12 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         setAllText(title, name, date, charge, comment);
     }
 
+    /**
+     * Sets the class's private vars' buffer to have preset for Adding Subscription,
+     * which mainly comprises of hardcoded defaults except for the title.
+     *
+     * @param intent
+     */
     public void HandleAdding(Intent intent) {
         this.title = intent.getStringExtra(MainActivity.ADD_TITLE);
         this.name = "Subscription";
@@ -176,6 +218,16 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         setAllText(title, this.name, this.date, this.charge, this.comment);
     }
 
+    /**
+     * setAllText updates textViews and edtTexts' text with their respective data
+     * (e.g textView_title set its text to be "Add Subscriptions" & editText_charge having "9")
+     *
+     * @param title
+     * @param name
+     * @param date
+     * @param charge
+     * @param comment
+     */
     public void setAllText(String title, String name, String date, double charge, String comment) {
         textView_title.setText(title);
         editText_name.setText(name);
