@@ -37,6 +37,18 @@ import android.widget.Toast;
  * Created by Henry on 2018-02-01.
  */
 
+/**
+ * Represents the page where you view the information of a subscription that
+ * was passed from MainActivity, this gives the user an opportunity to pass
+ * that information a second time towards EditSubscriptionActivity to pass
+ * back towards MainActivity to modify the contents of subscription.
+ *
+ * @author hingyue
+ * @version 1.0
+ * @see AppCompatActivity
+ * @see ViewSubscriptionActivity
+ * @see EditSubscriptionActivity
+ */
 public class ViewSubscriptionActivity extends AppCompatActivity {
 
     public static final String EDIT_NAME = "com.echo.subbook.EDIT_NAME";
@@ -53,6 +65,12 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
     private String comment;
     private int index;
 
+    /**
+     * ViewSubscriptionActivity sets up the layout, extracts the information from the intent
+     * of MainActivity and puts up the information onto textView. Not only that, the
+     * ViewSubscriptionActivity handles user interaction for button_edit, which is associated
+     * with viewSub_edit_subscription; that sends information to EditSubscriptionActivity.class
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +97,12 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
         button_edit.setText("Edit Subscription");
 
         button_edit.setOnClickListener(new View.OnClickListener() {
-
+            /**
+             * button_edit's onClick method and sends an intent with information from its
+             * recieved intent from MainActivity.class towards EditSubscriptionActivity.class
+             *
+             * @param view
+             */
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), EditSubscriptionActivity.class);
 
@@ -94,6 +117,15 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * onActivityResultMethod takes in the result and intent from EditSubscriptionActivity,
+     * and acts as a mediator to add the index number into the recieved intent so that
+     * MainActivity.class can know which item of the subscription to delete or edit.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if ((requestCode == EDIT_CODE) && (intent != null)) {
