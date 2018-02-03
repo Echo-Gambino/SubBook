@@ -129,46 +129,42 @@ public class EditSubscriptionActivity extends AppCompatActivity {
                 String date_temp = editText_date.getText().toString();
                 double charge_temp = Double.valueOf(editText_charge.getText().toString());
                 String comment_temp = editText_comment.getText().toString();
-                String message;
+                String message = null;
 
                 if (name_temp.length() > 20) {
                     message = "The subscription name exceeded 20 characters, " +
                             "please try again.";
+                    editText_name.setText(name);
+                }  else if (isDateFormatCorrect(date_temp) == false) {
+                    message = "Date not formatted correctly, \n please try again";
+                    editText_date.setText(date);
                 } else if (charge_temp < 0) {
                     message = "The amount of money charged from a subscription should be positive, " +
                             "please try again.";
+                    editText_charge.setText(Double.toString(charge));
                 } else if (comment_temp.length() > 30) {
                     message = "The subscription comment exceeded 30 characters, " +
                             "please try again.";
+                    editText_comment.setText(comment);
                 } else {
-                    message = null;
-                    try {
-                        /* Converting a Date.toString() format back to a Date datatype was acquired
-                        * via Marko's post within the given link:
-                        * https://stackoverflow.com/questions/9431927/how-to-convert-date-tostring-back-to-date
-                        */
-                        Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(date_temp);
-                        name = name_temp;
-                        date = date_temp;
-                        charge = charge_temp;
-                        comment = comment_temp;
+                    name = name_temp;
+                    date = date_temp;
+                    charge = charge_temp;
+                    comment = comment_temp;
 
-                        intent.putExtra(RET_NAME, name);
-                        intent.putExtra(RET_DATE, date);
-                        intent.putExtra(RET_CHARGE, charge);
-                        intent.putExtra(RET_COMMENT, comment);
+                    intent.putExtra(RET_NAME, name);
+                    intent.putExtra(RET_DATE, date);
+                    intent.putExtra(RET_CHARGE, charge);
+                    intent.putExtra(RET_COMMENT, comment);
 
-                        setResult(Activity.RESULT_OK, intent);
-                        finish();
-
-                    } catch (Exception e) {
-                        message = "Date not formatted correctly, \n please try again";
-                    }
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
                 }
                 if (message != null) {
                     Toast.makeText(getApplicationContext(), message,
                             Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
@@ -186,6 +182,25 @@ public class EditSubscriptionActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    /**
+     * isDateFormatCorrect returns true if given String form of date is coherent with
+     * the format that was set by date.toString(), and false if not.
+     *
+     * @param date
+     */
+    public boolean isDateFormatCorrect(String date) {
+        Date date_dummy = null;
+        try {
+            /* Converting a Date.toString() format back to a Date datatype was acquired
+            * via Marko's post within the given link:
+            * https://stackoverflow.com/questions/9431927/how-to-convert-date-tostring-back-to-date
+            */
+            String date_format = "EEE MMM dd HH:mm:ss zzz yyyy";
+            date_dummy = new SimpleDateFormat(date_format).parse(date);
+        } catch (Exception e) {}
+        return (date_dummy != null);
     }
 
     /**
@@ -215,7 +230,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         this.date = (new Date()).toString();
         this.charge = 10.00;
         this.comment = "";
-        setAllText(title, this.name, this.date, this.charge, this.comment);
+        setAllText(title, name, date, charge, comment);
     }
 
     /**

@@ -39,19 +39,19 @@ import java.util.Date;
  * @version 1.0
  * */
 public class Subscription {
-    private String name;        // Have a maximum of 20 characters in name.
+    private String name;
     private Date date;
     private double charge;
-    private String comment;     // Have a maximum of 30 characters in comments.
+    private String comment;
 
     /**
      * Consctructs a Subscription object
      */
     public Subscription() {
-        this.name = "";
-        this.date = new Date();
-        this.charge = 0.00;
-        this.comment = "";
+        this.name = "";             // Represents the name that represents the Subscription.
+        this.date = new Date();     // Represents the date that the Subscription started.
+        this.charge = 0.00;         // Represents the charge that Subscription costs.
+        this.comment = "";          // Represents the comment to attach the Subscription.
     }
 
     /**
@@ -60,7 +60,7 @@ public class Subscription {
      * @param name
      */
     public Subscription(String name) {
-        this();
+        this();                     // Cascades the Constructor to Subscription().
         this.name = name;
     }
 
@@ -71,7 +71,7 @@ public class Subscription {
      * @param date
      */
     public Subscription(String name, Date date) {
-        this(name);
+        this(name);                 // Cascades the Constructor to Subscription(name).
         this.date = date;
     }
 
@@ -83,7 +83,7 @@ public class Subscription {
      * @param charge
      */
     public Subscription(String name, Date date, double charge) {
-        this(name, date);
+        this(name, date);           // Cascades the Constructor to Subscription(name, date)
         this.charge = charge;
     }
 
@@ -96,7 +96,7 @@ public class Subscription {
      * @param comment
      */
     public Subscription(String name, Date date, double charge, String comment) {
-        this(name, date, charge);
+        this(name, date, charge);   // Cascades the Constructor to Subscription(name, date, charge)
         this.comment = comment;
     }
 
@@ -120,9 +120,9 @@ public class Subscription {
         which was forked from vingk/lonelyTwitter.
         */
         if (name.length() > 20) {
-            throw new StringTooLongException();
+            throw new StringTooLongException();     // if name exceeds 20 chars, throws StringTooLongException
         } else {
-            this.name = name;
+            this.name = name;   // if name doesn't exceed 20 chars, let Subscription name be the argument
         }
     }
 
@@ -144,16 +144,17 @@ public class Subscription {
         this.date = date;
     }
 
+
     /**
      * Sets the date of Subscription object with an argument of a String datatype.
      *
      * @param date
      */
     public void setDate(String date) {
-        String date_format = "EEE MMM dd HH:mm:ss zzz yyyy";
+        String date_format = "EEE MMM dd HH:mm:ss zzz yyyy";    // Represents format to convert the String to Date object.
         try {
-            this.date = new SimpleDateFormat(date_format).parse(date);
-        } catch (Exception e) {}
+            this.date = new SimpleDateFormat(date_format).parse(date);  // try set the date to the String converted Date object.
+        } catch (Exception e) {}    // if attempt to set the date failed, do nothing.
     }
 
     /**
@@ -173,9 +174,9 @@ public class Subscription {
      */
     public void setCharge(double charge) throws NegativeIntegerException {
         if (charge < 0.0) {
-            throw new NegativeIntegerException();
+            throw new NegativeIntegerException();   // if the argument has a negative number, then throw a NegativeIntegerException
         } else {
-            this.charge = charge;
+            this.charge = charge;   // if the argument given is a positive number, let Subscription charge be the argument
         }
     }
 
@@ -199,9 +200,9 @@ public class Subscription {
         which was forked from vingk/lonelyTwitter.
         */
         if (comment.length() > 30) {
-            throw new StringTooLongException();
+            throw new StringTooLongException();     // if the argument exceeds 30 chars, throws StringTooLongException
         } else {
-            this.comment = comment;
+            this.comment = comment;     // if the argument doesn't exceed 30 chars, let Subscription comment be argument given
         }
     }
 
@@ -214,7 +215,7 @@ public class Subscription {
     @Override
     public String toString() {
         String message = name + ": \t $" + Double.toString(charge) + "\n"
-                + date.toString();
+                + date.toString();  // message is "name: $<charge> \n <comment>"
         return message;
     }
 

@@ -42,15 +42,15 @@ import java.util.List;
  * @see Subscription
  */
 public class SubscriptionList {
-    private ArrayList<Subscription> subList;
-    private double totalCharge;
+    private ArrayList<Subscription> subList;    // ArrayList to keep track of all its Subscriptions
+    private double totalCharge;                 // totalCharge stores the total charge of all Subscriptions within ArrayList
 
     /**
      * Consctructs a SubscriptionList object
      */
     public SubscriptionList() {
-        this.subList = new ArrayList<Subscription>();
-        this.totalCharge = 0.00;
+        this.subList = new ArrayList<Subscription>();   // initializes subList with an ArrayList<Subscription>
+        this.totalCharge = 0.00;                        // initialize totalCharge with 0.00
     }
 
     /**
@@ -59,9 +59,9 @@ public class SubscriptionList {
      * @param subList
      */
     public SubscriptionList(ArrayList<Subscription> subList) {
-        this();
-        this.subList = subList;
-        this.refreshSum();
+        this();                     // Cascades constructor to SubscriptionList()
+        this.subList = subList;     // set subList to the given ArrayList<Subscription>
+        this.refreshSum();          // calculates the sum from the given arraylist stored within the object.
     }
 
     /**
@@ -70,8 +70,8 @@ public class SubscriptionList {
      * @param subscription
      */
     public void addSubscription(Subscription subscription) {
-        this.totalCharge = this.totalCharge + subscription.getCharge();
-        this.subList.add(subscription);
+        totalCharge = totalCharge + subscription.getCharge();   // updates the totalCharge with the new subscription
+        subList.add(subscription);                              // adds subscription onto object's ArrayList
     }
 
     /**
@@ -81,8 +81,8 @@ public class SubscriptionList {
      * @param index
      */
     public void delSubscription(int index) {
-        this.totalCharge = this.totalCharge - this.subList.get(index).getCharge();
-        this.subList.remove(index);
+        totalCharge = totalCharge - subList.get(index).getCharge(); // updates the totalCharge with removal of subscription
+        subList.remove(index);                                      // removes subscription from object's ArrayList
     }
 
     /**
@@ -103,23 +103,24 @@ public class SubscriptionList {
      * @param new_subscription
      */
     public void setSubscription(Subscription old_subscription, Subscription new_subscription) {
-        String new_name = new_subscription.getName();
-        try {
-            old_subscription.setName(new_name);
-        } catch(Exception e) {}     // Do nothing if new_name exceeds char count.
+        String new_name = new_subscription.getName();       // get new_sub's name
+        Date new_date = new_subscription.getDate();         // get new_sub's date
+        double new_charge = new_subscription.getCharge();   // get new_sub's charge
+        String new_comment = new_subscription.getComment(); // get new_sub's comment
 
-        Date new_date = new_subscription.getDate();
-        old_subscription.setDate(new_date);
-
-        double new_charge = new_subscription.getCharge();
         try {
-            old_subscription.setCharge(new_charge);
-        } catch(Exception e) {}
+            old_subscription.setName(new_name); // Try to set new_sub's name onto old_sub
+        } catch(Exception e) {}                 // Do nothing if new_sub's name exceeds char count
 
-        String new_comment = new_subscription.getComment();
+        old_subscription.setDate(new_date);     // Sets the new_date onto old_sub.
+
         try {
-            new_subscription.setComment(new_comment);
-        } catch(Exception e) {}     // Do nothing if new_comment exceeds char count.
+            old_subscription.setCharge(new_charge); // Try to set new_sub's charge onto old_sub
+        } catch(Exception e) {}                     // Do nothing if new_sub's charge is negative
+
+        try {
+            new_subscription.setComment(new_comment);   // Try to set new_sub's comment onto old_sub
+        } catch(Exception e) {}                         // Do nothing if new_comment's comment exceeds char count.
     }
 
     /**
@@ -138,8 +139,8 @@ public class SubscriptionList {
      * @param subList
      */
     public void setSubscriptionList(ArrayList<Subscription> subList) {
-        this.subList = subList;
-        this.refreshSum();
+        this.subList = subList;     // Let SubscriptionList's ArrayList be given ArrayList argument
+        this.refreshSum();          // Recalculate the sum of SubscriptionList
     }
 
     /**
@@ -155,11 +156,11 @@ public class SubscriptionList {
      * Recalculates the sum of monetary charge of all Subscriptions within the SubscriptionList
      * */
     public void refreshSum() {
-        double sum = 0.00;
+        double sum = 0.00;      // Let the sum to accumulate start at 0.00
         for(int i = 0; i < this.subList.size(); i++) {
-            sum = sum + this.subList.get(i).getCharge();
+            sum = sum + this.subList.get(i).getCharge();    // For every subscription in arraylist, add its subscription onto the sum
         }
-        this.totalCharge = sum;
+        this.totalCharge = sum; // Let totalCharge be sum
     }
 
 }
