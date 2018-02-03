@@ -1,3 +1,27 @@
+/*
+ * CMPUT 301
+ *
+ * v0.9 - Workable prototype that doesn't crash under normal use.
+ *
+ * 2018-02-05
+ *
+ * Copyright 2018 Hing Yue (Henry) Lam
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+ * persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * includedin allcopies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+ * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.echo.subbook;
 
 import android.app.Activity;
@@ -30,6 +54,18 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * MainActivity represents the main page of the SubBook app, which is responsible for displaying,
+ * editing, and updating the subscription list, and also provides methods to edit, add, and
+ * remove subscriptions from that list as well.
+ *
+ * @author hingyue
+ * @version 1.0
+ * @see AppCompatActivity
+ * @see EditSubscriptionActivity
+ * @see ViewSubscriptionActivity
+ * */
 public class MainActivity extends AppCompatActivity {
 
     public static final String ADD_TITLE = "com.echo.subbook.ADD_TITLE";
@@ -54,18 +90,33 @@ public class MainActivity extends AppCompatActivity {
     */
     public static final int ADD_CODE = 1;
 
+    /**
+     * onCreate method for MainActivity, which sets up the screen/layout in view and
+     * handles all the interactable's (buttons & listitems) code when interacted upoun.
+     *
+     * @param savedInstanceState
+     * @see EditSubscriptionActivity
+     * @see ViewSubscriptionActivity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize the UI elements
         textView_sub_sum = findViewById(R.id.textView_total_charge);
         listView_sub_list = findViewById(R.id.listView_subscription);
         Button addSubButton = findViewById(R.id.button_add_subscription);
 
-        // Set up button triggers
         addSubButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick deals with user click/tap interaction for addSubButton; when addSubButton
+             * detects a click/tap, it creates a new intent with the destination of
+             * EditSubscriptionActivity.class, alongside storing the string "Add Subscription"
+             * within that Intent, whilst expecting a return from that activity.
+             *
+             * @param view
+             * @see EditSubscriptionActivity
+             */
             public void onClick(View view) {
                 /* Code for Intent intent = new Intent(view.getContext(), ...) was found by this link:
                 * https://stackoverflow.com/questions/19464100/starting-intent-from-onclicklistener#19464142
@@ -85,6 +136,19 @@ public class MainActivity extends AppCompatActivity {
          * https://stackoverflow.com/questions/4709870/setonitemclicklistener-on-custom-listview
          */
         listView_sub_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * onItemClick deals with inputs when the user clicks/taps the individual list items
+             * within te listView. onItemClick takes the object listItem and convert it into
+             * a Subscription object which it (most likely) once was, then it would extract and
+             * send all its information (name, date, charge, comment) alongside its position in
+             * the list to viewSubscriptionActivity.class.
+             *
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             * @see ViewSubscriptionActivity
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView_sub_list.getItemAtPosition(position);
@@ -104,6 +168,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * onActivityResult deals with the returns from the Activities started by the ClickListeners
+     * from addSubButton and listView_sub_list. This takes in the requestCode and resultCode
+     * to determines the type of return from an activity (e.g AddSubscriptionActivity canceled its
+     * addSubscription; thus it does not do anything with SubscriptionList). If intent is null,
+     * then the method assumes that it signifies no changes should be enacted, which it follows suit.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param intent
+     * @see EditSubscriptionActivity
+     * @see ViewSubscriptionActivity
+     */
     /* Code for the onActivityResult(...) {} to be able to respond to the intent of the
     * returned Activity that Main started was from the link:
     * https://stackoverflow.com/questions/37768604/how-to-use-startactivityforresult
@@ -165,6 +243,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * onStart initializes this whenever the Activity is started, which loads in
+     * the required data from loadFromFile(), creates the list_adapter, and
+     * sets up list_adapter as te adapter for listView_sub_list. Finally, it
+     * takes the sum of all subscriptions generated by the .getSum() method of
+     * obj_subscription and uses the double as part of the display for
+     * textView_sub_sum.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -176,15 +263,16 @@ public class MainActivity extends AppCompatActivity {
 
         listView_sub_list.setAdapter(list_adapter);
 
-        refreshTotal();
-    }
-
-    private void refreshTotal() {
         double sum = obj_subscription.getSum();
         String sum_message = "Total Charge: " + Double.toString(sum);
         textView_sub_sum.setText(sum_message);
     }
 
+    /**
+     * loadFromFile loads the data onto obj_subscription that was previously stored by the
+     * app itself, if loadFromFile() fails to find the app, it simply initializes
+     * obj_subscription with a new SubscriptionList object.
+     */
     // loadFromFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter
     private void loadFromFile() {
         try {
@@ -202,6 +290,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * saveInFile stores the data from obj_subscription into a file designated by the app.
+     */
     // saveInFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter
     private void saveInFile() {
         try {
