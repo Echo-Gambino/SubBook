@@ -38,7 +38,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
     private String title;
     private String name;
     private String date;
-    private int charge;
+    private double charge;
     private String comment;
 
     @Override
@@ -59,7 +59,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         this.title = "Title";
         this.name = "Name";
         this.date = (new Date()).toString();
-        this.charge = 0;
+        this.charge = 0.00;
         this.comment = "Comment";
         String button_confirm_text = "Confirm";
         String button_cancel_text = "Back";
@@ -78,15 +78,14 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         button_confirm.setText(button_confirm_text);
         button_cancel.setText(button_cancel_text);
 
-
         button_confirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 String name_temp = editText_name.getText().toString();
                 String date_temp = editText_date.getText().toString();
-                int charge_temp = Integer.valueOf(editText_charge.getText().toString());
+                double charge_temp = Double.valueOf(editText_charge.getText().toString());
                 String comment_temp = editText_comment.getText().toString();
-                String message = "";
+                String message;
 
                 if (name_temp.length() > 20) {
                     message = "The subscription name exceeded 20 characters, " +
@@ -98,7 +97,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
                     message = "The subscription comment exceeded 30 characters, " +
                             "please try again.";
                 } else {
-                    message = "Success!";
+                    message = null;
                     try {
                         /* Converting a Date.toString() format back to a Date datatype was acquired
                         * via Marko's post within the given link:
@@ -123,10 +122,10 @@ public class EditSubscriptionActivity extends AppCompatActivity {
                         // editText_date.setText(date);
                     }
                 }
-//                Toast.makeText(getApplicationContext(), intent.toString(),
-//                        Toast.LENGTH_LONG).show();
-//                Toast.makeText(getApplicationContext(), message,
-//                       Toast.LENGTH_LONG).show();
+                if (message != null) {
+                    Toast.makeText(getApplicationContext(), message,
+                            Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -158,7 +157,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         this.title = intent.getStringExtra(ViewSubscriptionActivity.EDIT_TITLE);
         this.name = intent.getStringExtra(ViewSubscriptionActivity.EDIT_NAME);
         this.date = intent.getStringExtra(ViewSubscriptionActivity.EDIT_DATE);
-        this.charge = intent.getIntExtra(ViewSubscriptionActivity.EDIT_CHARGE, 0);
+        this.charge = intent.getDoubleExtra(ViewSubscriptionActivity.EDIT_CHARGE, 0);
         this.comment = intent.getStringExtra(ViewSubscriptionActivity.EDIT_COMMENT);
         setAllText(title, name, date, charge, comment);
     }
@@ -167,16 +166,16 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         this.title = intent.getStringExtra(MainActivity.ADD_TITLE);
         this.name = "Subscription";
         this.date = (new Date()).toString();
-        this.charge = 10;
+        this.charge = 10.00;
         this.comment = "";
         setAllText(title, this.name, this.date, this.charge, this.comment);
     }
 
-    public void setAllText(String title, String name, String date, int charge, String comment) {
+    public void setAllText(String title, String name, String date, double charge, String comment) {
         textView_title.setText(title);
         editText_name.setText(name);
         editText_date.setText(date);
-        editText_charge.setText(Integer.toString(charge));
+        editText_charge.setText(Double.toString(charge));
         editText_comment.setText(comment);
     }
 

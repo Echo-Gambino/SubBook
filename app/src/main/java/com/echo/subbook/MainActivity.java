@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     /* public static final int for startActivityForResult & knowledge of how to use startActivityForResult found in link:
     * https://stackoverflow.com/questions/37768604/how-to-use-startactivityforresult
     */
-    public static final int REQUEST_CODE = 1;
+    public static final int ADD_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 /* Code for startActivityForResult(...); and other snippets of code was found in the link:
                 * https://stackoverflow.com/questions/15393899/how-to-close-activity-and-go-back-to-previous-activity-in-android
                 */
-                startActivityForResult(intent, REQUEST_CODE);
+                startActivityForResult(intent, ADD_CODE);
             }
         });
 
@@ -122,21 +123,63 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
+//        String message = "requestCode: " + Integer.toString(requestCode) + "\n" +
+//                "resultCode: " + Integer.toString(resultCode) + "\n" +
+//                "intent: " + intent.toString();
+//        Toast.makeText(getApplicationContext(), message,
+//                Toast.LENGTH_LONG).show();
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == VIEW_CODE) {
-                Toast.makeText(getApplicationContext(), "okay",
+        if ((resultCode == Activity.RESULT_OK) && (intent != null)) {
+            Subscription sub = new Subscription();
+            try {
+                String ret_name = intent.getStringExtra(EditSubscriptionActivity.RET_NAME);
+                String ret_date = intent.getStringExtra(EditSubscriptionActivity.RET_DATE);
+                double ret_charge = intent.getDoubleExtra(EditSubscriptionActivity.RET_CHARGE, 0);
+                String comment = intent.getStringExtra(EditSubscriptionActivity.RET_COMMENT);
+
+                sub.setName(ret_name);
+                sub.setDate(ret_date);
+                sub.setCharge(ret_charge);
+                sub.setComment(comment);
+
+                String feedback_message = "";
+                if (requestCode == ADD_CODE) {
+                    obj_subscription.addSubscription(sub);
+                    feedback_message = "Subscription added";
+                    Toast.makeText(getApplicationContext(), feedback_message,
+                            Toast.LENGTH_SHORT).show();
+                } else if (requestCode == VIEW_CODE) {
+                    int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
+                    Subscription old_sub = obj_subscription.getSubscription(index);
+                    obj_subscription.setSubscription(old_sub, sub);
+                    feedback_message = "Suscription edited";
+                    Toast.makeText(getApplicationContext(), feedback_message,
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                list_adapter.notifyDataSetChanged();
+
+                saveInFile();
+
+            } catch (Exception e) {
+                String error_message = "Error: Subscription operation failed";
+                Toast.makeText(getApplicationContext(), error_message,
                         Toast.LENGTH_SHORT).show();
             }
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            if (requestCode == VIEW_CODE) {
-                int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
-                obj_subscription.delSubscription(index);
-            }
 
-//            String a = Integer.toString(requestCode);
-//            Toast.makeText(getApplicationContext(), a,
-//                    Toast.LENGTH_LONG).show();
+        } else if ((resultCode == Activity.RESULT_CANCELED) && (intent != null)) {
+            if (requestCode == VIEW_CODE) {
+                if (intent.hasExtra(ViewSubscriptionActivity.EDIT_INDEX)) {
+                    int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
+                    obj_subscription.delSubscription(index);
+                    list_adapter.notifyDataSetChanged();
+                    saveInFile();
+                }
+            } else if (requestCode == ADD_CODE) {
+                String feedback_message = "Canceled add subscription";
+                Toast.makeText(getApplicationContext(), feedback_message,
+                        Toast.LENGTH_SHORT).show();
+            }
         }
 
         /*
@@ -178,11 +221,25 @@ public class MainActivity extends AppCompatActivity {
 //        list_adapter = new ArrayAdapter<Subscription>(this,
 //                android.R.layout.simple_list_item_1, arraylist_subscription);
 
+//        list_adapter = new ArrayAdapter<Subscription>(this,
+//                R.layout.sub_item, obj_subscription.getSubscriptionList());
+
         list_adapter = new ArrayAdapter<Subscription>(this,
                 android.R.layout.simple_list_item_1, obj_subscription.getSubscriptionList());
 
+//        list_adapter = new ArrayAdapter<Subscription>(this,
+//                R.layout.sub_item, obj_subscription.getSubscriptionList());
+
         listView_sub_list.setAdapter(list_adapter);
 
+        refreshTotal();
+
+    }
+
+    private void refreshTotal() {
+        double sum = obj_subscription.getSum();
+        String sum_message = "Total Charge: " + Double.toString(sum);
+        textView_sub_sum.setText(sum_message);
     }
 
     // loadFromFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter

@@ -16,7 +16,7 @@ public class SubscriptionList {
 
     public SubscriptionList() {
         this.subList = new ArrayList<Subscription>();
-        this.totalCharge = 0.0;
+        this.totalCharge = 0.00;
     }
 
     public SubscriptionList(ArrayList<Subscription> subList) {
@@ -48,7 +48,7 @@ public class SubscriptionList {
         Date new_date = new_subscription.getDate();
         old_subscription.setDate(new_date);
 
-        int new_charge = new_subscription.getCharge();
+        double new_charge = new_subscription.getCharge();
         try {
             old_subscription.setCharge(new_charge);
         } catch(Exception e) {}
