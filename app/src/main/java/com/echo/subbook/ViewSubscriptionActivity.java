@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Date;
-
 /**
  * Created by Henry on 2018-02-01.
  */
@@ -69,14 +67,11 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
 
                 startActivityForResult(intent, EDIT_CODE);
             }
-
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
         if ((requestCode == EDIT_CODE) && (intent != null)) {
             intent.putExtra(EDIT_INDEX, index);
             setResult(resultCode, intent);
