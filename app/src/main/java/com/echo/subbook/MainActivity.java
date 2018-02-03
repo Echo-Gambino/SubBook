@@ -32,7 +32,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String ESA_TITLE = "com.echo.subbook.ESA_TITLE";
     public static final String ADD_TITLE = "com.echo.subbook.ADD_TITLE";
     public static final String FILENAME = "subfile.sav";
 
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter<Subscription> list_adapter;
     private ArrayList<Subscription> arraylist_subscription;
-//    private ArrayList<Subscription> arraylist_subscription = new ArrayList<Subscription>();
     private SubscriptionList obj_subscription;
 
     /* public static final int for startActivityForResult & knowledge of how to use startActivityForResult found in link:
@@ -66,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
         listView_sub_list = findViewById(R.id.listView_subscription);
         Button addSubButton = findViewById(R.id.button_add_subscription);
 
-//        ArrayList<Subscription> this.arraylist_subscription = new ArrayList<Subscription>();
-
-
         // Set up button triggers
         addSubButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -77,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 * This was used because I didn't know how to send an intent in View.OnClickListener()
                 */
                 Intent intent = new Intent(view.getContext(), EditSubscriptionActivity.class);
-                // intent.putExtra(ESA_TITLE ,"Add Subscription");
                 intent.putExtra(ADD_TITLE ,"Add Subscription");
                 /* Code for startActivityForResult(...); and other snippets of code was found in the link:
                 * https://stackoverflow.com/questions/15393899/how-to-close-activity-and-go-back-to-previous-activity-in-android
@@ -95,12 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = listView_sub_list.getItemAtPosition(position);
 
-
                 Subscription sub = ((Subscription) listItem);
-//                String message = sub.toString() + "   " + Integer.toString(position) + "\n"
-//                        + obj_subscription.getSubscription(position);
-//                Toast.makeText(getApplicationContext(), message,
-//                        Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(view.getContext(), ViewSubscriptionActivity.class);
 
@@ -113,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, VIEW_CODE);
             }
         });
-
     }
 
     /* Code for the onActivityResult(...) {} to be able to respond to the intent of the
@@ -122,12 +110,6 @@ public class MainActivity extends AppCompatActivity {
     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
-//        String message = "requestCode: " + Integer.toString(requestCode) + "\n" +
-//                "resultCode: " + Integer.toString(resultCode) + "\n" +
-//                "intent: " + intent.toString();
-//        Toast.makeText(getApplicationContext(), message,
-//                Toast.LENGTH_LONG).show();
 
         if ((resultCode == Activity.RESULT_OK) && (intent != null)) {
             Subscription sub = new Subscription();
@@ -181,31 +163,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         }
-
-        /*
-        if (requestCode == REQUEST_CODE) {
-            textView_sub_sum.setText("REQUEST_CODE");
-
-            Subscription sub = new Subscription("Netflix");
-            Subscription sub1 = new Subscription("Netflix1");
-            Subscription sub2 = new Subscription("Netflix2");
-            Subscription sub3 = new Subscription("Netflix3");
-            Subscription sub4 = new Subscription("Netflix4");
-//            arraylist_subscription.add(sub);
-            obj_subscription.addSubscription(sub);
-            obj_subscription.addSubscription(sub1);
-            obj_subscription.addSubscription(sub2);
-            obj_subscription.addSubscription(sub3);
-            obj_subscription.addSubscription(sub4);
-
-//            String message = arraylist_subscription.toString();
-//            Toast.makeText(getApplicationContext(), message,
-//                    Toast.LENGTH_LONG).show();
-
-            list_adapter.notifyDataSetChanged();
-            saveInFile();
-        }
-        */
     }
 
     @Override
@@ -213,27 +170,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         loadFromFile();
-//        list_adapter = new ArrayAdapter<Subscription>(this,
-//                R.layout.sub_item, arraylist_subscription);
-//        list_adapter = new ArrayAdapter<Subscription>(this,
-//                android.R.layout.simple_list_item_1, arraylist_subscription);
-
-//        list_adapter = new ArrayAdapter<Subscription>(this,
-//                android.R.layout.simple_list_item_1, arraylist_subscription);
-
-//        list_adapter = new ArrayAdapter<Subscription>(this,
-//                R.layout.sub_item, obj_subscription.getSubscriptionList());
 
         list_adapter = new ArrayAdapter<Subscription>(this,
                 android.R.layout.simple_list_item_1, obj_subscription.getSubscriptionList());
 
-//        list_adapter = new ArrayAdapter<Subscription>(this,
-//                R.layout.sub_item, obj_subscription.getSubscriptionList());
-
         listView_sub_list.setAdapter(list_adapter);
 
         refreshTotal();
-
     }
 
     private void refreshTotal() {
@@ -249,14 +192,10 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Subscription>>(){}.getType();
-//            arraylist_subscription = gson.fromJson(in, listType);
             ArrayList<Subscription> subList = gson.fromJson(in, listType);
-//            obj_subscription = new SubscriptionList(arraylist_subscription);
             obj_subscription = new SubscriptionList(subList);
         } catch (FileNotFoundException e) {
-//            arraylist_subscription = new ArrayList<Subscription>();
             ArrayList<Subscription> subList = new ArrayList<Subscription>();
-//            obj_subscription = new SubscriptionList(arraylist_subscription);
             obj_subscription = new SubscriptionList(subList);
         } catch (IOException e) {
             e.printStackTrace();
@@ -269,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
-//            gson.toJson(arraylist_subscription, out);
             gson.toJson(obj_subscription.getSubscriptionList(), out);
             out.flush();
         } catch(FileNotFoundException e) {
