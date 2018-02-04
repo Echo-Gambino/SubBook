@@ -24,14 +24,12 @@
 
 package com.echo.subbook;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Henry on 2018-02-01.
@@ -51,12 +49,13 @@ import android.widget.Toast;
  */
 public class ViewSubscriptionActivity extends AppCompatActivity {
 
+    public static final String EDIT_TITLE = "com.echo.subbook.EDIT_TITLE";
     public static final String EDIT_NAME = "com.echo.subbook.EDIT_NAME";
     public static final String EDIT_DATE = "com.echo.subbook.EDIT_DATE";
     public static final String EDIT_CHARGE = "com.echo.subbook.EDIT_CHARGE";
     public static final String EDIT_COMMENT = "com.echo.subbook.EDIT_COMMENT";
-    public static final String EDIT_TITLE = "com.echo.subbook.EDIT_TITLE";
     public static final String EDIT_INDEX = "com.echo.subbook.EDIT_INDEX";
+
     public static final int EDIT_CODE = 3;
 
     private String name;    // Name of subscription
@@ -87,11 +86,11 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
          * ViewSubscriptionActivity's variables
          */
         Intent intent = getIntent();
-        name = intent.getStringExtra(MainActivity.SUBSCRIPTION_NAME);
-        date = intent.getStringExtra(MainActivity.SUBSCRIPTION_DATE);
-        charge = intent.getDoubleExtra(MainActivity.SUBSCRIPTION_CHARGE, 0);
-        comment = intent.getStringExtra(MainActivity.SUBSCRIPTION_COMMENT);
-        index = intent.getIntExtra(MainActivity.SUBSCRIPTION_INDEX, 0);
+        name = intent.getStringExtra(MainActivity.SUB_NAME);
+        date = intent.getStringExtra(MainActivity.SUB_DATE);
+        charge = intent.getDoubleExtra(MainActivity.SUB_CHARGE, 0);
+        comment = intent.getStringExtra(MainActivity.SUB_COMMENT);
+        index = intent.getIntExtra(MainActivity.SUB_INDEX, 0);
 
         /* Sets & formats the text of the textView and button to the stored variables of
          * ViewSubscriptionActivity; which was set with info of the given intent above.

@@ -49,10 +49,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -68,14 +65,19 @@ import java.util.List;
  * */
 public class MainActivity extends AppCompatActivity {
 
-    public static final String ADD_TITLE = "com.echo.subbook.ADD_TITLE";
     public static final String FILENAME = "subfile.sav";
 
-    public static final String SUBSCRIPTION_NAME = "com.echo.subbook.SUBSCRIPTION_NAME";
-    public static final String SUBSCRIPTION_DATE = "com.echo.subbook.SUBSCRIPTION_DATE";
-    public static final String SUBSCRIPTION_CHARGE = "com.echo.subbook.SUBSCRIPTION_CHARGE";
-    public static final String SUBSCRIPTION_COMMENT = "com.echo.subbook.SUBSCRIPTION_COMMENT";
-    public static final String SUBSCRIPTION_INDEX = "com.echo.subbook.SUBSCRIPTION_INDEX";
+    public static final String ADD_TITLE = "com.echo.subbook.ADD_TITLE";
+    public static final String SUB_NAME = "com.echo.subbook.SUBSCRIPTION_NAME";
+    public static final String SUB_DATE = "com.echo.subbook.SUBSCRIPTION_DATE";
+    public static final String SUB_CHARGE = "com.echo.subbook.SUBSCRIPTION_CHARGE";
+    public static final String SUB_COMMENT = "com.echo.subbook.SUBSCRIPTION_COMMENT";
+    public static final String SUB_INDEX = "com.echo.subbook.SUBSCRIPTION_INDEX";
+
+    /* public static final int for startActivityForResult & knowledge of how to use startActivityForResult found in link:
+    * https://stackoverflow.com/questions/37768604/how-to-use-startactivityforresult
+    */
+    public static final int ADD_CODE = 1;
     public static final int VIEW_CODE = 2;
 
     private TextView textView_sub_sum;
@@ -84,11 +86,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Subscription> list_adapter;
     private ArrayList<Subscription> arraylist_subscription;
     private SubscriptionList obj_subscription;
-
-    /* public static final int for startActivityForResult & knowledge of how to use startActivityForResult found in link:
-    * https://stackoverflow.com/questions/37768604/how-to-use-startactivityforresult
-    */
-    public static final int ADD_CODE = 1;
 
     /**
      * onCreate method for MainActivity, which sets up the screen/layout in view and
@@ -166,11 +163,11 @@ public class MainActivity extends AppCompatActivity {
                  * sending it out to ViewSubscriptionActivity.
                  */
                 Intent intent = new Intent(view.getContext(), ViewSubscriptionActivity.class);
-                intent.putExtra(SUBSCRIPTION_NAME, sub.getName());
-                intent.putExtra(SUBSCRIPTION_DATE, sub.getDate().toString());
-                intent.putExtra(SUBSCRIPTION_CHARGE, sub.getCharge());
-                intent.putExtra(SUBSCRIPTION_COMMENT, sub.getComment());
-                intent.putExtra(SUBSCRIPTION_INDEX, position);
+                intent.putExtra(SUB_NAME, sub.getName());
+                intent.putExtra(SUB_DATE, sub.getDate().toString());
+                intent.putExtra(SUB_CHARGE, sub.getCharge());
+                intent.putExtra(SUB_COMMENT, sub.getComment());
+                intent.putExtra(SUB_INDEX, position);
                 startActivityForResult(intent, VIEW_CODE);
             }
         });
@@ -309,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
          * the double given into a string and puts it onto textView_sub_sum.
          */
         double sum = obj_subscription.getSum();
-        String sum_message = "Total Charge: " + Double.toString(sum);
+        String sum_message = "Total Charge: $" + Double.toString(sum);
         textView_sub_sum.setText(sum_message);
     }
 

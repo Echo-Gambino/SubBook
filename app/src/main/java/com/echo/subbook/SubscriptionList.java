@@ -28,11 +28,8 @@ package com.echo.subbook;
  * Created by Henry on 2018-01-29.
  */
 
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Represents SubscriptionList
