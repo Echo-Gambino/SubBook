@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Henry\\AndroidStudioProjects\\SubBook\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\Henry\\AndroidStudioProjects\\hingyue-SubBook\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Henry\\.gradle\\caches\\transforms-1\\files-1.1\\constraint-layout-1.0.2.aar\\54061fa601d0cd04e80a70d9b06599d3\\res\\values\\values.xml",

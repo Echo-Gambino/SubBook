@@ -1,4 +1,4 @@
-#Sat Feb 03 23:58:42 MST 2018
-base.0=C\:\\Users\\Henry\\AndroidStudioProjects\\SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Sun Feb 04 01:46:43 MST 2018
+base.0=C\:\\Users\\Henry\\AndroidStudioProjects\\hingyue-SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

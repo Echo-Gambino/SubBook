@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\54061fa601d0cd04e80a70d9b06599d3\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\9732a774c5117e024c0a40a571e144bc\AndroidManifest.xml:17:1-28:12
@@ -15,25 +15,25 @@ MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Henry\.grad
 MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\5a0de3c4090c7a540de590c3bdb96424\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\24eb1291a7b4e230d36ef0bb725e7611\AndroidManifest.xml:17:1-31:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\8cd1051c1a939232e04c0f1808fc2044\AndroidManifest.xml:17:1-30:12
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
 	package
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:27:5-31
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:27:5-39
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:1-52:12
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:26:11-69
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:26:11-69
 application
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:29:5-50:19
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:29:5-50:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\54061fa601d0cd04e80a70d9b06599d3\AndroidManifest.xml:9:5-20
@@ -57,43 +57,43 @@ MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Henry\.gradle\c
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\8cd1051c1a939232e04c0f1808fc2044\AndroidManifest.xml:24:5-28:19
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\8cd1051c1a939232e04c0f1808fc2044\AndroidManifest.xml:24:5-28:19
 	android:supportsRtl
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:34:9-35
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:34:9-35
 	android:label
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:32:9-41
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:32:9-40
 	android:roundIcon
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:33:9-54
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:33:9-54
 	android:icon
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:31:9-43
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:31:9-43
 	android:allowBackup
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:30:9-35
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:30:9-35
 	android:theme
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:35:9-40
-activity#com.echo.subbook.MainActivity
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:36:9-42:20
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:35:9-40
+activity#com.echo.hingyue_subbook.MainActivity
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:36:9-42:20
 	android:name
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:36:19-47
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:36:19-71
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:37:13-41:29
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:37:13-41:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:38:17-69
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:38:17-69
 	android:name
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:38:25-66
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:38:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:40:17-77
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:40:17-77
 	android:name
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:40:27-74
-activity#com.echo.subbook.EditSubscriptionActivity
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:43:9-47:20
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:40:27-74
+activity#com.echo.hingyue_subbook.EditSubscriptionActivity
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:43:9-47:20
 	android:name
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:43:19-59
-activity#com.echo.subbook.ViewSubscriptionActivity
-ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:48:9-49:20
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:43:19-83
+activity#com.echo.hingyue_subbook.ViewSubscriptionActivity
+ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:48:9-49:20
 	android:name
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml:48:19-59
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml:48:19-83
 uses-sdk
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\54061fa601d0cd04e80a70d9b06599d3\AndroidManifest.xml:5:5-7:41
@@ -116,18 +116,18 @@ MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Henry\.gradle\c
 MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\24eb1291a7b4e230d36ef0bb725e7611\AndroidManifest.xml:21:5-23:58
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\8cd1051c1a939232e04c0f1808fc2044\AndroidManifest.xml:20:5-22:41
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\8cd1051c1a939232e04c0f1808fc2044\AndroidManifest.xml:20:5-22:41
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Henry\AndroidStudioProjects\SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Henry\AndroidStudioProjects\hingyue-SubBook\app\src\main\AndroidManifest.xml
 meta-data#android.support.VERSION
 ADDED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\cfe42e7660ed94f3cd8f3578f66bb8ff\AndroidManifest.xml:26:9-28:38
 MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\Henry\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\9732a774c5117e024c0a40a571e144bc\AndroidManifest.xml:23:9-25:38

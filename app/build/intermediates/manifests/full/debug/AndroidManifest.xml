@@ -35,26 +35,26 @@
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="hingyue-SubBook"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.echo.subbook.MainActivity" >
+        <activity android:name="com.echo.hingyue_subbook.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.echo.subbook.EditSubscriptionActivity" >
+        <activity android:name="com.echo.hingyue_subbook.EditSubscriptionActivity" >
 
             <!--
         activity segment of .EditSubscriptionActivity was figured out from:
         https://stackoverflow.com/questions/24610527/how-do-i-get-a-button-to-open-another-activity-in-android-studio#24610673
             -->
         </activity>
-        <activity android:name="com.echo.subbook.ViewSubscriptionActivity" >
+        <activity android:name="com.echo.hingyue_subbook.ViewSubscriptionActivity" >
         </activity>
 
         <meta-data

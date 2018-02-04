@@ -1,7 +1,7 @@
 #Internal package file, do not edit.
-#Fri Jan 26 13:10:45 MST 2018
+#Sun Feb 04 01:46:43 MST 2018
 0.baseType=DIRECTORY
-0.base=C\:\\Users\\Henry\\AndroidStudioProjects\\SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.base=C\:\\Users\\Henry\\AndroidStudioProjects\\hingyue-SubBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 0.path=classes.dex
 0.set=DEX
 count=1
