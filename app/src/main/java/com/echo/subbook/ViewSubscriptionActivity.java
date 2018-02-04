@@ -31,6 +31,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Henry on 2018-02-01.
  */
@@ -97,7 +99,12 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
          */
         textView_name.setText(name);
         textView_date.setText(date);
-        textView_charge.setText("$" + Double.toString(charge));
+                /* The use of the method of rounding charge to two decimal places is
+         * by Jonik's answer in a StackOverFlow post by the link shown:
+         * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#2808648
+         */
+        DecimalFormat df = new DecimalFormat("#0.00");
+        textView_charge.setText("$" + df.format(charge));
         String comment_text = "Comment: \n" + comment;
         textView_comment.setText(comment_text);
         button_edit.setText("Edit Subscription");

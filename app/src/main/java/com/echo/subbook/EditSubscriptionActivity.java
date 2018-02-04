@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -224,12 +225,12 @@ public class EditSubscriptionActivity extends AppCompatActivity {
     public boolean isDateFormatCorrect(String date) {
         Date date_dummy = null;
         try {
-            /* Converting a Date.toString() format back to a Date datatype was acquired
-            * via Marko's post within the given link:
-            * https://stackoverflow.com/questions/9431927/how-to-convert-date-tostring-back-to-date
-            */
-            String date_format = "EEE MMM dd HH:mm:ss zzz yyyy";
-            date_dummy = new SimpleDateFormat(date_format).parse(date);
+            /* The use of SimpleDateFormat for converting Date() to yyyy-MM-dd format
+             * is found by Nadish Krishnan's answer to the StackOverFlow post
+             * "how to convert date into yyyy-MM-dd format?", link is given below:
+             * https://stackoverflow.com/questions/14039062/how-to-convert-date-in-to-yyyy-mm-dd-format
+             */
+            date_dummy = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (Exception e) {}
         /* returns true if try succeeded (String able to be formatted to date) and false
          * if it goes returns with an exceptions (String unable to be formatted to date) */
@@ -261,13 +262,19 @@ public class EditSubscriptionActivity extends AppCompatActivity {
      * @param intent
      */
     public void HandleAdding(Intent intent) {
+        /* The use of SimpleDateFormat for converting Date() to yyyy-MM-dd format
+         * is found by Nadish Krishnan's answer to the StackOverFlow post
+         * "how to convert date into yyyy-MM-dd format?", link is given below:
+         * https://stackoverflow.com/questions/14039062/how-to-convert-date-in-to-yyyy-mm-dd-format
+         */
+        SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
         /* set the title variable of EditSubscriptionActivity with the given
          * intent and set the rest with the presets below, then enact
          * the changes with setAllText
          */
         this.title = intent.getStringExtra(MainActivity.ADD_TITLE);
         this.name = "Subscription";
-        this.date = (new Date()).toString();
+        this.date = date_format.format(new Date());
         this.charge = 10.00;
         this.comment = "";
         setAllText(title, name, date, charge, comment);
@@ -284,10 +291,15 @@ public class EditSubscriptionActivity extends AppCompatActivity {
      * @param comment
      */
     public void setAllText(String title, String name, String date, double charge, String comment) {
+        /* The use of the method of rounding charge to two decimal places is
+         * by Jonik's answer in a StackOverFlow post by the link shown:
+         * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#2808648
+         */
+        DecimalFormat df = new DecimalFormat("#0.00");
         textView_title.setText(title);
         editText_name.setText(name);
         editText_date.setText(date);
-        editText_charge.setText(Double.toString(charge));
+        editText_charge.setText(df.format(charge));
         editText_comment.setText(comment);
     }
 

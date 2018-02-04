@@ -28,8 +28,12 @@ package com.echo.subbook;
  * Created by Henry on 2018-01-29.
  */
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static java.lang.Math.abs;
+import static java.lang.Math.round;
 
 /**
  * Represents a subscription
@@ -83,7 +87,17 @@ public class Subscription {
      */
     public Subscription(String name, Date date, double charge) {
         this(name, date);           // Cascades the Constructor to Subscription(name, date)
-        this.charge = charge;
+        /* The use of the method of rounding charge to two decimal places is
+         * by Jonik's answer in a StackOverFlow post by the link shown:
+         * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#2808648
+         */
+        DecimalFormat df = new DecimalFormat("#.##");
+        /* The use of the method abs was found from Job Skeet's post on the StackOverFlow post
+         * on "Make a Negative Number Positive", which the link to is provided below:
+         * https://stackoverflow.com/questions/493494/make-a-negative-number-positive#493501
+         */
+        charge = abs(charge);
+        this.charge = Double.valueOf(df.format(charge));
     }
 
     /**
@@ -150,9 +164,13 @@ public class Subscription {
      * @param date
      */
     public void setDate(String date) {
-        String date_format = "EEE MMM dd HH:mm:ss zzz yyyy";    // Represents format to convert the String to Date object.
         try {
-            this.date = new SimpleDateFormat(date_format).parse(date);  // try set the date to the String converted Date object.
+            /* The use of SimpleDateFormat for converting Date() to yyyy-MM-dd format
+             * is found by Nadish Krishnan's answer to the StackOverFlow post
+             * "how to convert date into yyyy-MM-dd format?", link is given below:
+             * https://stackoverflow.com/questions/14039062/how-to-convert-date-in-to-yyyy-MM-dd-format
+             */
+            this.date = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         } catch (Exception e) {}    // if attempt to set the date failed, do nothing.
     }
 
@@ -173,9 +191,21 @@ public class Subscription {
      */
     public void setCharge(double charge) throws NegativeIntegerException {
         if (charge < 0.0) {
-            throw new NegativeIntegerException();   // if the argument has a negative number, then throw a NegativeIntegerException
+            // if the argument has a negative number, then throw a NegativeIntegerException
+            throw new NegativeIntegerException();
         } else {
-            this.charge = charge;   // if the argument given is a positive number, let Subscription charge be the argument
+            // if the argument given is a positive number, let Subscription charge be the argument
+            /* The use of the method of rounding charge to two decimal places is
+             * by Jonik's answer in a StackOverFlow post by the link shown:
+             * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#2808648
+             */
+            DecimalFormat df = new DecimalFormat("#.##");
+            /* The use of the method abs was found from Job Skeet's post on the StackOverFlow post
+             * on "Make a Negative Number Positive", which the link to is provided below:
+             * https://stackoverflow.com/questions/493494/make-a-negative-number-positive#493501
+             */
+            charge = abs(charge);
+            this.charge = Double.valueOf(df.format(charge));
         }
     }
 
@@ -213,8 +243,19 @@ public class Subscription {
      * */
     @Override
     public String toString() {
-        String message = name + ": \t $" + Double.toString(charge) + "\n"
-                + date.toString();  // message is "name: $<charge> \n <comment>"
+        /* The use of the method of rounding charge to two decimal places is
+         * by Jonik's answer in a StackOverFlow post by the link shown:
+         * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#2808648
+         */
+        DecimalFormat df = new DecimalFormat("#0.00");
+        /* The use of SimpleDateFormat for converting Date() to yyyy-MM-dd format
+         * is found by Nadish Krishnan's answer to the StackOverFlow post
+         * "how to convert date into yyyy-MM-dd format?", link is given below:
+         * https://stackoverflow.com/questions/14039062/how-to-convert-date-in-to-yyyy-mm-dd-format
+         */
+        SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
+        String message = name + ": \t $" + df.format(charge) + "\n"
+                + date_format.format(date);  // message is "name: $<charge> \n <comment>"
         return message;
     }
 

@@ -49,6 +49,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -158,13 +160,20 @@ public class MainActivity extends AppCompatActivity {
                 Object listItem = listView_sub_list.getItemAtPosition(position);
                 Subscription sub = ((Subscription) listItem);
 
+                /* The use of SimpleDateFormat for converting Date() to yyyy-MM-dd format
+                 * is found by Nadish Krishnan's answer to the StackOverFlow post
+                 * "how to convert date into yyyy-MM-dd format?", link is given below:
+                 * https://stackoverflow.com/questions/14039062/how-to-convert-date-in-to-yyyy-mm-dd-format
+                 */
+                SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
+
                 /* Create a new intent for ViewSubscriptionActivity, and fill it with
                  * the Subscription object's name, date, charge, and comment before
                  * sending it out to ViewSubscriptionActivity.
                  */
                 Intent intent = new Intent(view.getContext(), ViewSubscriptionActivity.class);
                 intent.putExtra(SUB_NAME, sub.getName());
-                intent.putExtra(SUB_DATE, sub.getDate().toString());
+                intent.putExtra(SUB_DATE, date_format.format(sub.getDate()));
                 intent.putExtra(SUB_CHARGE, sub.getCharge());
                 intent.putExtra(SUB_COMMENT, sub.getComment());
                 intent.putExtra(SUB_INDEX, position);
@@ -194,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
+        String feedback_message = "";   // set up the feed_back message to display results
         if ((resultCode == Activity.RESULT_OK) && (intent != null)) {
             /* Occurs only if the returning result from Activity is OK and not a 'back' button
             * press from the phone itself
@@ -218,22 +228,17 @@ public class MainActivity extends AppCompatActivity {
                 sub.setCharge(ret_charge);
                 sub.setComment(ret_comment);
 
-                String feedback_message = "";   // set up the feed_back message to display results
 
                 if (requestCode == ADD_CODE) {
                     /* Occurs if Activity returned is from a request to add a Subscription */
                     obj_subscription.addSubscription(sub);
                     feedback_message = "Subscription added";
-                    Toast.makeText(getApplicationContext(), feedback_message,
-                            Toast.LENGTH_SHORT).show();
                 } else if (requestCode == VIEW_CODE) {
                     /* Occurs if Activity returned is from a request to edit a Subscription */
                     int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
                     Subscription old_sub = obj_subscription.getSubscription(index);
                     obj_subscription.setSubscription(old_sub, sub);
                     feedback_message = "Suscription edited";
-                    Toast.makeText(getApplicationContext(), feedback_message,
-                            Toast.LENGTH_SHORT).show();
                 }
 
                 /* After the code has been executed, it is now assumed that the ArrayList
@@ -247,11 +252,8 @@ public class MainActivity extends AppCompatActivity {
                 /* Occurs in a fatal event which editing or adding the subscription onto the
                  * ArrayList is not possible without an error.
                  */
-                String error_message = "Error: Subscription operation failed";
-                Toast.makeText(getApplicationContext(), error_message,
-                        Toast.LENGTH_SHORT).show();
+                feedback_message = "Error: Subscription operation failed";
             }
-
         } else if ((resultCode == Activity.RESULT_CANCELED) && (intent != null)) {
             /* Occurs when user pressed the cancel/delete button of EditSubscriptionActivity */
             if (requestCode == VIEW_CODE) {
@@ -266,16 +268,17 @@ public class MainActivity extends AppCompatActivity {
                     obj_subscription.delSubscription(index);
                     list_adapter.notifyDataSetChanged();
                     saveInFile();
+                    feedback_message = "Deleted subscription";
                 }
             } else if (requestCode == ADD_CODE) {
                 /* Occurs when EditsubscriptionActivity sends information signifying
                 * that it canceled adding a Subscription to SubscriptionList.
                 */
-                String feedback_message = "Canceled add subscription";
-                Toast.makeText(getApplicationContext(), feedback_message,
-                        Toast.LENGTH_SHORT).show();
+                feedback_message = "Canceled add subscription";
             }
         }
+        Toast.makeText(getApplicationContext(), feedback_message,
+                Toast.LENGTH_SHORT).show();
     }
 
 
@@ -306,7 +309,12 @@ public class MainActivity extends AppCompatActivity {
          * the double given into a string and puts it onto textView_sub_sum.
          */
         double sum = obj_subscription.getSum();
-        String sum_message = "Total Charge: $" + Double.toString(sum);
+        /* The use of the method of rounding charge to two decimal places is
+         * by Jonik's answer in a StackOverFlow post by the link shown:
+         * https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places#2808648
+         */
+        DecimalFormat df = new DecimalFormat("#0.00");
+        String sum_message = "Total Charge: $" + df.format(sum);
         textView_sub_sum.setText(sum_message);
     }
 
