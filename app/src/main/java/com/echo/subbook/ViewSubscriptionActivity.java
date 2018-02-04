@@ -59,11 +59,11 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
     public static final String EDIT_INDEX = "com.echo.subbook.EDIT_INDEX";
     public static final int EDIT_CODE = 3;
 
-    private String name;
-    private String date;
-    private double charge;
-    private String comment;
-    private int index;
+    private String name;    // Name of subscription
+    private String date;    // Date of Subscription
+    private double charge;  // Charge of Subscription
+    private String comment; // Comment of Subscription
+    private int index;      // Where the subscription is within the ArrayList of SubscriptionList
 
     /**
      * ViewSubscriptionActivity sets up the layout, extracts the information from the intent
@@ -76,12 +76,16 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_subscription);
 
+        /* Initialize the textViews and button from activity_view_subscription.xml */
         TextView textView_name = findViewById(R.id.viewSub_textView_name);
         TextView textView_date = findViewById(R.id.viewSub_textView_date);
         TextView textView_charge = findViewById(R.id.viewSub_textView_charge);
         TextView textView_comment = findViewById(R.id.viewSub_textView_comment);
         Button button_edit = findViewById(R.id.viewSub_button_edit_subscription);
 
+        /* Extract the intent, then the information from that intent onto
+         * ViewSubscriptionActivity's variables
+         */
         Intent intent = getIntent();
         name = intent.getStringExtra(MainActivity.SUBSCRIPTION_NAME);
         date = intent.getStringExtra(MainActivity.SUBSCRIPTION_DATE);
@@ -89,6 +93,9 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
         comment = intent.getStringExtra(MainActivity.SUBSCRIPTION_COMMENT);
         index = intent.getIntExtra(MainActivity.SUBSCRIPTION_INDEX, 0);
 
+        /* Sets & formats the text of the textView and button to the stored variables of
+         * ViewSubscriptionActivity; which was set with info of the given intent above.
+         */
         textView_name.setText(name);
         textView_date.setText(date);
         textView_charge.setText("$" + Double.toString(charge));
@@ -104,14 +111,16 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
              * @param view
              */
             public void onClick(View view) {
+                /* Create new intent for EditSubscriptionActivity.class */
                 Intent intent = new Intent(view.getContext(), EditSubscriptionActivity.class);
-
+                /* Fill intent with the name, date, charge, and comment of the intent received
+                 * when ViewActivity was created and sends it out to EditSubscriptionActivity.
+                 */
                 intent.putExtra(EDIT_NAME, name);
                 intent.putExtra(EDIT_DATE, date);
                 intent.putExtra(EDIT_CHARGE, charge);
                 intent.putExtra(EDIT_COMMENT, comment);
                 intent.putExtra(EDIT_TITLE, "Edit Subscription");
-
                 startActivityForResult(intent, EDIT_CODE);
             }
         });
@@ -129,9 +138,17 @@ public class ViewSubscriptionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if ((requestCode == EDIT_CODE) && (intent != null)) {
+            /* If the requestCode is EditSubscriptionActivity and the intent is not
+             * null this signifies that it returned by either pressing confirm edit
+             * or delete subscription, which it relays all the information to MainActivity
+             * and adds the index of the specified subscription in the ArrayList*/
             intent.putExtra(EDIT_INDEX, index);
             setResult(resultCode, intent);
             finish();
         }
+        /* If the intent is null (Signify that the 'back' button was pressed), then
+         * the ViewSubscriptionActivity does nothing, as it assumes that the user
+         * canceled the change for editing the Subscription
+         */
     }
 }

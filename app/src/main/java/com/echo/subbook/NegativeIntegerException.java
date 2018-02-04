@@ -36,4 +36,5 @@ package com.echo.subbook;
  * @see Exception
  */
 public class NegativeIntegerException extends Exception {
+    // This class extends to Exception, so it throws an exception.
 }

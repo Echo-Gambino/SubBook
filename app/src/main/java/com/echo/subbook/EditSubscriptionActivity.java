@@ -80,6 +80,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_subscription);
 
+        /* Initialize textView, editText, and Buttons from the activity_edit_subscription */
         textView_title = findViewById(R.id.editSub_textView_title);
         editText_name = findViewById(R.id.editSub_editText_name);
         editText_date = findViewById(R.id.editSub_editText_date);
@@ -88,8 +89,7 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         Button button_confirm = findViewById(R.id.editSub_button_confirm);
         Button button_cancel = findViewById(R.id.editSub_button_cancel);
 
-        Intent intent = getIntent();
-
+        /* Initialize the variables needed to set the texts of objects initialized above */
         this.title = "Title";
         this.name = "Name";
         this.date = (new Date()).toString();
@@ -98,16 +98,27 @@ public class EditSubscriptionActivity extends AppCompatActivity {
         String button_confirm_text = "Confirm";
         String button_cancel_text = "Back";
 
+        Intent intent = getIntent();    // Extract intent that was called by an Activity
+
         if (intent.hasExtra(ViewSubscriptionActivity.EDIT_TITLE)) {
+            /* If the sent intent has an Extra by ViewSubscriptionActivity.EDIT_TITLE,
+             * assume that the other extras are also provided and the Activity and layout
+             * to accommodate for editing the Subscription.
+             */
             HandleEditing(intent);
             button_confirm_text = "Confirm Subscription";
             button_cancel_text = "Delete Subscription";
         } else if (intent.hasExtra(MainActivity.ADD_TITLE)) {
+            /* If the sent intent has an Extra by MainActivity.ADD_TITLE
+             * assume that the other extras are also provided and the Activity are layout
+             * to accomadate for adding the Subscription.
+             */
             HandleAdding(intent);
             button_confirm_text = "Add Subscription";
             button_cancel_text = "Cancel Subscription";
         }
 
+        /* Sets the text of the buttons */
         button_confirm.setText(button_confirm_text);
         button_cancel.setText(button_cancel_text);
 
@@ -124,43 +135,60 @@ public class EditSubscriptionActivity extends AppCompatActivity {
              * @param view
              * */
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                /* Extract information from the editTexts in the UI */
                 String name_temp = editText_name.getText().toString();
                 String date_temp = editText_date.getText().toString();
                 double charge_temp = Double.valueOf(editText_charge.getText().toString());
                 String comment_temp = editText_comment.getText().toString();
-                String message = null;
+                String message = null;  // Sets up the error message in case user gives bad input
 
                 if (name_temp.length() > 20) {
+                    /* Occurs if name_temp exceeds 20 characters */
                     message = "The subscription name exceeded 20 characters, " +
                             "please try again.";
                     editText_name.setText(name);
                 }  else if (isDateFormatCorrect(date_temp) == false) {
+                    /* Occurs if date_temp cannot be formatted into a Date datatype */
                     message = "Date not formatted correctly, \n please try again";
                     editText_date.setText(date);
                 } else if (charge_temp < 0) {
+                    /* Occurs if charge_temp is negatives */
                     message = "The amount of money charged from a subscription should be positive, " +
                             "please try again.";
                     editText_charge.setText(Double.toString(charge));
                 } else if (comment_temp.length() > 30) {
+                    /* Occurs if comment_temp exceeds 30 characters */
                     message = "The subscription comment exceeded 30 characters, " +
                             "please try again.";
                     editText_comment.setText(comment);
                 } else {
+                    /* Occurs if all the data that has been extracted have satisfied
+                     * the program's constraints t operate without errors
+                     */
+                    /* sets the Activity's date to be the data pulled from UI */
                     name = name_temp;
                     date = date_temp;
                     charge = charge_temp;
                     comment = comment_temp;
 
+                    /* creates a new intent and ultimately puts the data from the UI into it */
+                    Intent intent = new Intent(view.getContext(), MainActivity.class);
                     intent.putExtra(RET_NAME, name);
                     intent.putExtra(RET_DATE, date);
                     intent.putExtra(RET_CHARGE, charge);
                     intent.putExtra(RET_COMMENT, comment);
 
+                    /* sets the result of the Activity as a success and sends
+                     * the intent back to the caller.
+                     */
                     setResult(Activity.RESULT_OK, intent);
                     finish();
                 }
                 if (message != null) {
+                    /* This is the segment where the Activity sends feedback to the user
+                     * on why the app cannot process the task fully. This is ignored if
+                     * the message is null (app completed the process without problems)
+                     */
                     Toast.makeText(getApplicationContext(), message,
                             Toast.LENGTH_LONG).show();
                 }
@@ -177,6 +205,9 @@ public class EditSubscriptionActivity extends AppCompatActivity {
              * @param view
              */
             public void onClick(View view) {
+                /* Create a new intent for MainActivity.class, mark the Activity's
+                 * result as a failure (or cancelled) and send it back to the caller
+                 */
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 setResult(Activity.RESULT_CANCELED, intent);
                 finish();
@@ -200,6 +231,8 @@ public class EditSubscriptionActivity extends AppCompatActivity {
             String date_format = "EEE MMM dd HH:mm:ss zzz yyyy";
             date_dummy = new SimpleDateFormat(date_format).parse(date);
         } catch (Exception e) {}
+        /* returns true if try succeeded (String able to be formatted to date) and false
+         * if it goes returns with an exceptions (String unable to be formatted to date) */
         return (date_dummy != null);
     }
 
@@ -210,6 +243,9 @@ public class EditSubscriptionActivity extends AppCompatActivity {
      * @param intent
      */
     public void HandleEditing(Intent intent) {
+        /* set the variables of EditSubscriptionActivity from the given
+         * intent's data and enact the changes with setAllText
+         */
         this.title = intent.getStringExtra(ViewSubscriptionActivity.EDIT_TITLE);
         this.name = intent.getStringExtra(ViewSubscriptionActivity.EDIT_NAME);
         this.date = intent.getStringExtra(ViewSubscriptionActivity.EDIT_DATE);
@@ -225,6 +261,10 @@ public class EditSubscriptionActivity extends AppCompatActivity {
      * @param intent
      */
     public void HandleAdding(Intent intent) {
+        /* set the title variable of EditSubscriptionActivity with the given
+         * intent and set the rest with the presets below, then enact
+         * the changes with setAllText
+         */
         this.title = intent.getStringExtra(MainActivity.ADD_TITLE);
         this.name = "Subscription";
         this.date = (new Date()).toString();

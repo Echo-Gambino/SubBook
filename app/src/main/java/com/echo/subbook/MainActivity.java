@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* Initialize the textViews and Button from activity_main.xml */
         textView_sub_sum = findViewById(R.id.textView_total_charge);
         listView_sub_list = findViewById(R.id.listView_subscription);
         Button addSubButton = findViewById(R.id.button_add_subscription);
@@ -118,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
              * @see EditSubscriptionActivity
              */
             public void onClick(View view) {
+                /* If addSubButton is pressed, create a new intent for EditSubscriptionActivity
+                 * and add extra information of its requested title before sending it off.
+                 */
                 /* Code for Intent intent = new Intent(view.getContext(), ...) was found by this link:
                 * https://stackoverflow.com/questions/19464100/starting-intent-from-onclicklistener#19464142
                 * This was used because I didn't know how to send an intent in View.OnClickListener()
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /**
+        /*
          * Code from stack overflow, details how to generate an output from a listView, Link:
          * https://stackoverflow.com/questions/4709870/setonitemclicklistener-on-custom-listview
          */
@@ -151,18 +155,22 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /* Gets the listItem as an argument of the method, and cast it
+                 * as a Subscription object (because its designed to only have
+                 * Subscription objects as list items).*/
                 Object listItem = listView_sub_list.getItemAtPosition(position);
-
                 Subscription sub = ((Subscription) listItem);
 
+                /* Create a new intent for ViewSubscriptionActivity, and fill it with
+                 * the Subscription object's name, date, charge, and comment before
+                 * sending it out to ViewSubscriptionActivity.
+                 */
                 Intent intent = new Intent(view.getContext(), ViewSubscriptionActivity.class);
-
                 intent.putExtra(SUBSCRIPTION_NAME, sub.getName());
                 intent.putExtra(SUBSCRIPTION_DATE, sub.getDate().toString());
                 intent.putExtra(SUBSCRIPTION_CHARGE, sub.getCharge());
                 intent.putExtra(SUBSCRIPTION_COMMENT, sub.getComment());
                 intent.putExtra(SUBSCRIPTION_INDEX, position);
-
                 startActivityForResult(intent, VIEW_CODE);
             }
         });
@@ -190,25 +198,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         if ((resultCode == Activity.RESULT_OK) && (intent != null)) {
-            Subscription sub = new Subscription();
+            /* Occurs only if the returning result from Activity is OK and not a 'back' button
+            * press from the phone itself
+            */
             try {
+                /* try statement is to appease sub.setName(), sub.setDate, sub.setCharge, etc.
+                * since they all can throw exceptions. The try statement should work every time
+                * due to the information cleaning from EditSubscriptionActivity before it returns.
+                */
+                /* extract name, date, charge, and comment from the given intent */
                 String ret_name = intent.getStringExtra(EditSubscriptionActivity.RET_NAME);
                 String ret_date = intent.getStringExtra(EditSubscriptionActivity.RET_DATE);
                 double ret_charge = intent.getDoubleExtra(EditSubscriptionActivity.RET_CHARGE, 0);
-                String comment = intent.getStringExtra(EditSubscriptionActivity.RET_COMMENT);
+                String ret_comment = intent.getStringExtra(EditSubscriptionActivity.RET_COMMENT);
 
+                /* create a new Subscription and set the information stored in ret_name,
+                 * ret_date, ret_charge, and ret_comment into the new Subscription.
+                 */
+                Subscription sub = new Subscription();
                 sub.setName(ret_name);
                 sub.setDate(ret_date);
                 sub.setCharge(ret_charge);
-                sub.setComment(comment);
+                sub.setComment(ret_comment);
 
-                String feedback_message = "";
+                String feedback_message = "";   // set up the feed_back message to display results
+
                 if (requestCode == ADD_CODE) {
+                    /* Occurs if Activity returned is from a request to add a Subscription */
                     obj_subscription.addSubscription(sub);
                     feedback_message = "Subscription added";
                     Toast.makeText(getApplicationContext(), feedback_message,
                             Toast.LENGTH_SHORT).show();
                 } else if (requestCode == VIEW_CODE) {
+                    /* Occurs if Activity returned is from a request to edit a Subscription */
                     int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
                     Subscription old_sub = obj_subscription.getSubscription(index);
                     obj_subscription.setSubscription(old_sub, sub);
@@ -217,25 +239,41 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
 
+                /* After the code has been executed, it is now assumed that the ArrayList
+                * is now different from before, so we notify the adapter that the data set
+                * changed and save the ArrayList.
+                */
                 list_adapter.notifyDataSetChanged();
-
                 saveInFile();
 
             } catch (Exception e) {
+                /* Occurs in a fatal event which editing or adding the subscription onto the
+                 * ArrayList is not possible without an error.
+                 */
                 String error_message = "Error: Subscription operation failed";
                 Toast.makeText(getApplicationContext(), error_message,
                         Toast.LENGTH_SHORT).show();
             }
 
         } else if ((resultCode == Activity.RESULT_CANCELED) && (intent != null)) {
+            /* Occurs when user pressed the cancel/delete button of EditSubscriptionActivity */
             if (requestCode == VIEW_CODE) {
+                /* Occurs when EditSubscriptionActivity sends information to
+                 * delete subscription due to the user pressing the delete button.
+                 */
                 if (intent.hasExtra(ViewSubscriptionActivity.EDIT_INDEX)) {
+                    /* Occurs if the intent has the index number
+                     * necessary to facilitate the deletion
+                     */
                     int index = intent.getIntExtra(ViewSubscriptionActivity.EDIT_INDEX, 0);
                     obj_subscription.delSubscription(index);
                     list_adapter.notifyDataSetChanged();
                     saveInFile();
                 }
             } else if (requestCode == ADD_CODE) {
+                /* Occurs when EditsubscriptionActivity sends information signifying
+                * that it canceled adding a Subscription to SubscriptionList.
+                */
                 String feedback_message = "Canceled add subscription";
                 Toast.makeText(getApplicationContext(), feedback_message,
                         Toast.LENGTH_SHORT).show();
@@ -256,13 +294,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        loadFromFile();
+        loadFromFile();     /* Initializes SubscriptionList */
 
+        /* list_adapter is initialized with ArrayAdapter using simple_list_item_1 as its list
+         * item layout and obj_subscription's SubscriptionList as the list to reference,
+         * which, it uses the listView_sub_list as the adapter acting as a mediator between
+         * the SubscriptionList and listView.
+         */
         list_adapter = new ArrayAdapter<Subscription>(this,
                 android.R.layout.simple_list_item_1, obj_subscription.getSubscriptionList());
-
         listView_sub_list.setAdapter(list_adapter);
 
+        /* Initializes the sum charge from obj_subscription.getSum(), then it formats
+         * the double given into a string and puts it onto textView_sub_sum.
+         */
         double sum = obj_subscription.getSum();
         String sum_message = "Total Charge: " + Double.toString(sum);
         textView_sub_sum.setText(sum_message);
@@ -273,18 +318,22 @@ public class MainActivity extends AppCompatActivity {
      * app itself, if loadFromFile() fails to find the app, it simply initializes
      * obj_subscription with a new SubscriptionList object.
      */
-    // loadFromFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter
+    /* loadFromFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter */
     private void loadFromFile() {
         try {
+            /* Attempts to extract the data to initialize
+             * obj_subscription from a predetermined file.
+             */
             FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<Subscription>>(){}.getType();
-            ArrayList<Subscription> subList = gson.fromJson(in, listType);
-            obj_subscription = new SubscriptionList(subList);
+            Type listType = new TypeToken<SubscriptionList>(){}.getType();
+            obj_subscription = gson.fromJson(in, listType);
         } catch (FileNotFoundException e) {
-            ArrayList<Subscription> subList = new ArrayList<Subscription>();
-            obj_subscription = new SubscriptionList(subList);
+            /* Tries to initialize obj_subscription with a
+             * clean clate if it cannot find the designated file.
+             */
+            obj_subscription = new SubscriptionList();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -293,13 +342,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * saveInFile stores the data from obj_subscription into a file designated by the app.
      */
-    // saveInFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter
+    /* saveInFile() taken from my lonelyTwitter repo, which was forked from vingk/lonelyTwitter */
     private void saveInFile() {
         try {
+            /* Tries to save obj_subscription's data onto the designated file */
             FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
-            gson.toJson(obj_subscription.getSubscriptionList(), out);
+            gson.toJson(obj_subscription, out);
             out.flush();
         } catch(FileNotFoundException e) {
             e.printStackTrace();
